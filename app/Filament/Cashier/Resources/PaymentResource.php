@@ -24,10 +24,12 @@ class PaymentResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-currency-dollar';
     protected static ?string $slug = 'payment-account-report';
-    protected static ?string $navigationGroup = 'Payment Accounts';
-    protected static ?string $navigationLabel = 'Payment Account Report';
-    protected static ?string $modelLabel = 'Payment Account Report';
-    protected static ?int $navigationSort = 6;
+   // protected static ?string $navigationGroup = 'Payment Accounts';
+    protected static ?string $navigationLabel = 'Payment';
+    protected static ?string $modelLabel = 'Payment';
+    protected static ?int $navigationSort = 1;
+
+    protected static bool $shouldRegisterNavigation = false;
     
     public static function getEloquentQuery(): Builder
     {

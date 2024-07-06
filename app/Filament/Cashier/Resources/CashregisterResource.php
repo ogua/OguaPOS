@@ -6,6 +6,8 @@ use App\Filament\Cashier\Resources\CashregisterResource\Pages;
 use App\Filament\Cashier\Resources\CashregisterResource\RelationManagers;
 use App\Models\Cashregister;
 use App\Models\Possettings;
+use App\Models\Warehouse;
+use Carbon\Carbon;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -62,11 +64,16 @@ class CashregisterResource extends Resource
                 Forms\Components\Hidden::make('user_id')
                     ->default(auth()->user()->id),
 
-                Forms\Components\Hidden::make('warehouse_id')
-                    ->default(Possettings::where('status',true)->latest()->first()->warehouse_id),
+                Forms\Components\Select::make('warehouse_id')
+                ->label('Warehouse / Shop location')
+                ->options(Warehouse::pluck('name','id'))
+                ->preload()
+                ->searchable()
+                ->required(),
                 
                 Forms\Components\Hidden::make('status')
                 ->default(true),
+
                 ])
                 ->columns(2),
             ]);
@@ -80,13 +87,12 @@ class CashregisterResource extends Resource
                     ->numeric()
                     ->sortable(),
 
-                Tables\Columns\TextColumn::make('user_id')
-                    ->numeric()
-                    ->sortable(),
+                Tables\Columns\TextColumn::make('warehouse.name')
+                ->label('Warehouse')
+                ->searchable(),
 
-                Tables\Columns\TextColumn::make('warehouse_id')
-                    ->numeric()
-                    ->sortable(),
+                Tables\Columns\TextColumn::make('closed_at')
+                ->sortable(),
 
                 Tables\Columns\IconColumn::make('status')
                     ->boolean(),
@@ -105,13 +111,21 @@ class CashregisterResource extends Resource
                 //
             ])
             ->actions([
-               // Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
-            ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
+                Tables\Actions\EditAction::make()
+                ->hidden(function ($record): bool
+                {
+                    $date = Carbon::parse($record->closed_at);
+                    $now = Carbon::now()->subDay(7);
+                    return $date->lessThan($now);
+
+                }),
+               // Tables\Actions\DeleteAction::make(),
+
+               Tables\Actions\Action::make('Print')
+                ->icon('heroicon-m-receipt-percent')
+                ->color('success')
+                ->url( fn ($record) => route('print-cash-register', $record->id), shouldOpenInNewTab: true),
+
             ]);
     }
 

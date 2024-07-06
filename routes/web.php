@@ -40,6 +40,9 @@ Route::get('/check', [WebController::class, 'check']);
 
 Route::get('/print-label', [WebController::class, 'printlabel']);
 
+Route::get('/cash-register/{record}', [WebController::class, 'printcashregister'])
+->name('print-cash-register');
+
 
 Route::get('/pos-invoice/{salesid}',[WebController::class, 'pos_invoice'])->name('pos-invoice')
 ->middleware(CheckposAuthentication::class);

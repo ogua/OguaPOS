@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cashregister;
 use App\Models\Companyinfo;
 use App\Models\Delivery;
 use App\Models\Invoice as Modelinvoice;
@@ -48,6 +49,48 @@ class WebController extends Controller
 
         return view('label.label-print',compact('productname','variation','productPrice','exTax',
         'businessname','expirydate','packingdate','incTax','products'));
+    }
+
+
+    public function printcashregister(Cashregister $record)
+    {        
+        $datefrom = date('Y-m-d', strtotime($record->created_at));
+        $dateto = date('Y-m-d', strtotime($record->closed_at));
+
+        $salesSummary = DB::table('sales')
+        ->whereBetween('sales.created_at',[$datefrom,$dateto])
+        ->join('payments', 'sales.id', '=', 'payments.sale_id')
+        ->where('sales.cash_register_id',$record->id)
+        ->select('payments.paying_method', DB::raw('SUM(payments.amount) as total_amount'))
+        ->groupBy('payments.paying_method')
+        ->get();
+
+        // Transform the results into an associative array
+        $salesSummaryArray = $salesSummary->pluck('total_amount', 'paying_method')->toArray();
+
+        
+        $salesbrandSummary = DB::table('sales')
+            ->whereBetween('sales.created_at',[$datefrom,$dateto])
+            ->join('sales_items', 'sales.id', '=', 'sales_items.sale_id')
+            ->join('products', 'sales_items.product_id', '=', 'products.id')
+            ->leftJoin('brands', 'products.brand_id', '=', 'brands.id')
+            ->where('sales.cash_register_id',$record->id)
+            ->select(
+                DB::raw('COALESCE(brands.name, "-") as brand_name'),
+                DB::raw('SUM(sales_items.qty) as total_qty'),
+                DB::raw('SUM(sales_items.total) as brand_total'),
+            )
+            ->groupBy('brands.name')
+            ->get();
+
+        // Convert to associative array for easier handling in the view
+        $salesSummaryArray = $salesbrandSummary->mapWithKeys(function ($item) {
+            return [$item->brand_name => $item->total_qty.','.$item->brand_total];
+        })->toArray();
+
+        $pos = Possettings::where('warehouse_id',$record->warehouse_id)->first();
+
+        return view('print.cash-register',compact('pos','record','datefrom','dateto','salesSummaryArray','salesSummaryArray'));
     }
 
     public function check()

@@ -10,34 +10,24 @@
 <div class="flex justify-end space-x-3">
 
 <div class="btn">
-<x-filament::button color="info" size="xs" icon="heroicon-o-currency-bangladeshi" tooltip="View suspended sales">
+<x-filament::button color="success" wire:click="opencashregister" size="xs" icon="heroicon-o-check-circle" tooltip="Register details" outline>
+Register details
 </x-filament::button>
 </div>
 
 <div class="btn">
-<x-filament::button color="success" wire:click="opencashregister" size="xs" icon="heroicon-o-shopping-bag" tooltip="Register details">
+<x-filament::button color="danger" wire:click="closecashregister" size="xs" icon="heroicon-o-x-circle" tooltip="Close register" outline>
+Close register
 </x-filament::button>
-</div>
-
-<div class="btn">
-<x-filament::button color="danger" wire:click="closecashregister" size="xs" icon="heroicon-o-x-circle" tooltip="Close register">
-</x-filament::button>
-</div>
-
-<div class="btn">
-    <x-filament::avatar
-    src="https://ui-avatars.com/api/?name=a&amp;color=FFFFFF&amp;background=fffff"
-    alt="{{ auth()->user()->name }}"
-    />
 </div>
 
 <div class="btn">
 <?php
 use Filament\Facades\Filament;
-    $panelid = Filament::getCurrentPanel()->getId();
+$panelid = Filament::getCurrentPanel()->getId();
 ?>
-<x-filament::button color="success" size="xs" href="/{{ auth()->user()->role }}" tag="a" icon="heroicon-o-backward" tooltip="Dashboard">
-    
+<x-filament::button color="success" size="xs" href="/{{ auth()->user()->role }}" tag="a" icon="heroicon-o-backspace" tooltip="Dashboard">
+Dashboard
 </x-filament::button>
 
 </div>
@@ -66,23 +56,23 @@ wire:model="received" wire:keyup="calculatechange"
 </x-filament::input.wrapper>
 </div> 
 <div class="w-1/2"> 
-    <label for="">Paying Amount</label>
-        <x-filament::input.wrapper :valid="! $errors->has('paying')">
-        <x-filament::input 
-        type="text"
-        wire:model="paying" wire:keyup="calculatechange" readonly
-        />
-        </x-filament::input.wrapper>
+<label for="">Paying Amount</label>
+<x-filament::input.wrapper :valid="! $errors->has('paying')">
+<x-filament::input 
+type="text"
+wire:model="paying" wire:keyup="calculatechange" readonly
+/>
+</x-filament::input.wrapper>
 </div>
 
 <div class="w-1/2"> 
-    <label for="">Change</label>
-    <x-filament::input.wrapper :valid="! $errors->has('change')" readonly>
-    <x-filament::input 
-    type="text"
-    wire:model="change"
-    />
-    </x-filament::input.wrapper>
+<label for="">Change</label>
+<x-filament::input.wrapper :valid="! $errors->has('change')" readonly>
+<x-filament::input 
+type="text"
+wire:model="change"
+/>
+</x-filament::input.wrapper>
 </div> 
 
 
@@ -97,7 +87,7 @@ wire:model="received" wire:keyup="calculatechange"
 <x-filament::input.select wire:model="paidby">
 <option>CASH</option>
 <option>PAYPAL</option>
- <option>CREDIT SALES</option>
+<option>CREDIT SALES</option>
 <option>CHEQUE</option>
 <option>GIFT CARD</option>
 <option>CREDIT CARD</option>
@@ -108,119 +98,119 @@ wire:model="received" wire:keyup="calculatechange"
 </div>
 
 <div class="w-1/2"> 
-    <label for="">Payment Account</label>
-    <x-filament::input.wrapper :valid="! $errors->has('account_id')">
-        <x-filament::input.select wire:model="account_id">
-        <option></option>
-        @foreach ($this->payingaccount as $payment)
-            <option value="{{  $payment->id }}">{{  $payment->account_name }}</option>
-        @endforeach
-        </x-filament::input.select>
-    </x-filament::input.wrapper>
+<label for="">Payment Account</label>
+<x-filament::input.wrapper :valid="! $errors->has('account_id')">
+<x-filament::input.select wire:model="account_id">
+<option></option>
+@foreach ($this->payingaccount as $payment)
+<option value="{{  $payment->id }}">{{  $payment->account_name }}</option>
+@endforeach
+</x-filament::input.select>
+</x-filament::input.wrapper>
 </div>
 
 @if ($paidby == "BANK TRANSFER")
 
 <div class="w-1/2"> 
-    <label for="">Bank name</label>
-    <x-filament::input.wrapper :valid="! $errors->has('bankname')" readonly>
-    <x-filament::input 
-    type="text"
-    wire:model="bankname"
-    />
-    </x-filament::input.wrapper>
+<label for="">Bank name</label>
+<x-filament::input.wrapper :valid="! $errors->has('bankname')" readonly>
+<x-filament::input 
+type="text"
+wire:model="bankname"
+/>
+</x-filament::input.wrapper>
 </div>
 
 <div class="w-1/2"> 
-    <label for="">Account number</label>
-    <x-filament::input.wrapper :valid="! $errors->has('accountnumber')" readonly>
-    <x-filament::input 
-    type="text"
-    wire:model="accountnumber"
-    />
-    </x-filament::input.wrapper>
+<label for="">Account number</label>
+<x-filament::input.wrapper :valid="! $errors->has('accountnumber')" readonly>
+<x-filament::input 
+type="text"
+wire:model="accountnumber"
+/>
+</x-filament::input.wrapper>
 </div>
 
 @endif
 
 @if ($paidby == "CHEQUE")
-    <div class="w-full">   
-        <label for="">Cheque number</label>
-        <x-filament::input.wrapper :valid="! $errors->has('cheque_no')">
-        <x-filament::input 
-        type="text"
-        wire:model="cheque_no"
-        />
-        </x-filament::input.wrapper>
-    </div>
+<div class="w-full">   
+<label for="">Cheque number</label>
+<x-filament::input.wrapper :valid="! $errors->has('cheque_no')">
+<x-filament::input 
+type="text"
+wire:model="cheque_no"
+/>
+</x-filament::input.wrapper>
+</div>
 @endif
 
 </div>
 
 @if ($paidby == "GIFT CARD")
-    <div class="w-full">
+<div class="w-full">
 
-    <x-filament::input
-         type="hidden"
-        wire:model="gift_card_id"
-     />
+<x-filament::input
+type="hidden"
+wire:model="gift_card_id"
+/>
 
-        <x-filament::input.wrapper :valid="! $errors->has('gift_card')">
-            <x-slot name="prefix">
-                {{ $gift_card_id ? 'Card Available' : 'Enter Card Code'}}
-            </x-slot>
-        
-            <x-filament::input
-                type="text"
-                wire:model="gift_card"
-            />
-        
-            <x-slot name="suffix">
-               <x-filament::button color="success" size="xs" icon="{{ $gift_card_id ? 'heroicon-o-check-circle' : 'heroicon-o-credit-card'}}" wire:click="checkgiftcard">
-                CHECK CARD
-                </x-filament::button>
-            </x-slot>
-       </x-filament::input.wrapper>
+<x-filament::input.wrapper :valid="! $errors->has('gift_card')">
+<x-slot name="prefix">
+{{ $gift_card_id ? 'Card Available' : 'Enter Card Code'}}
+</x-slot>
+
+<x-filament::input
+type="text"
+wire:model="gift_card"
+/>
+
+<x-slot name="suffix">
+<x-filament::button color="success" size="xs" icon="{{ $gift_card_id ? 'heroicon-o-check-circle' : 'heroicon-o-credit-card'}}" wire:click="checkgiftcard">
+CHECK CARD
+</x-filament::button>
+</x-slot>
+</x-filament::input.wrapper>
 
 
 
-    </div>
+</div>
 @endif
 
 @if ($paidby == "PAYPAL")
-    <div class="w-full">
+<div class="w-full">
 
-        <x-filament::input.wrapper :valid="! $errors->has('paypal_email')">
-            <x-slot name="prefix">
-                Paypal email
-            </x-slot>
-        
-            <x-filament::input
-                type="text"
-                wire:model="paypal_email"
-            />
-        
-            <x-slot name="suffix">
-               <x-filament::button color="success" size="xs" icon="heroicon-o-credit-card" wire:click="checkgiftcard">
-                CHECK OUT
-                </x-filament::button>
-            </x-slot>
-       </x-filament::input.wrapper>
+<x-filament::input.wrapper :valid="! $errors->has('paypal_email')">
+<x-slot name="prefix">
+Paypal email
+</x-slot>
+
+<x-filament::input
+type="text"
+wire:model="paypal_email"
+/>
+
+<x-slot name="suffix">
+<x-filament::button color="success" size="xs" icon="heroicon-o-credit-card" wire:click="checkgiftcard">
+CHECK OUT
+</x-filament::button>
+</x-slot>
+</x-filament::input.wrapper>
 
 
 
-    </div>
+</div>
 @endif
 
 
 <div class="w-full">   
 <label for="">Payment Note</label>
 <x-filament::input.wrapper :valid="! $errors->has('payment_note')">
-    <textarea 
-        wire:model="payment_note" 
-        class="block w-full border-none bg-transparent px-3 py-1.5 text-base text-gray-950 placeholder:text-gray-400 focus:ring-0 disabled:text-gray-500 disabled:[-webkit-text-fill-color:theme(colors.gray.500)] disabled:placeholder:[-webkit-text-fill-color:theme(colors.gray.400)] dark:text-white dark:placeholder:text-gray-500 dark:disabled:text-gray-400 dark:disabled:[-webkit-text-fill-color:theme(colors.gray.400)] dark:disabled:placeholder:[-webkit-text-fill-color:theme(colors.gray.500)] sm:text-sm sm:leading-6"
-        rows="5"
-    ></textarea>
+<textarea 
+wire:model="payment_note" 
+class="block w-full border-none bg-transparent px-3 py-1.5 text-base text-gray-950 placeholder:text-gray-400 focus:ring-0 disabled:text-gray-500 disabled:[-webkit-text-fill-color:theme(colors.gray.500)] disabled:placeholder:[-webkit-text-fill-color:theme(colors.gray.400)] dark:text-white dark:placeholder:text-gray-500 dark:disabled:text-gray-400 dark:disabled:[-webkit-text-fill-color:theme(colors.gray.400)] dark:disabled:placeholder:[-webkit-text-fill-color:theme(colors.gray.500)] sm:text-sm sm:leading-6"
+rows="5"
+></textarea>
 </x-filament::input.wrapper>
 </div>
 
@@ -230,20 +220,20 @@ wire:model="received" wire:keyup="calculatechange"
 <label for="">Sale Note</label>
 <x-filament::input.wrapper :valid="! $errors->has('sale_note')">
 <textarea 
-        wire:model="sale_note" 
-        class="block w-full border-none bg-transparent px-3 py-1.5 text-base text-gray-950 placeholder:text-gray-400 focus:ring-0 disabled:text-gray-500 disabled:[-webkit-text-fill-color:theme(colors.gray.500)] disabled:placeholder:[-webkit-text-fill-color:theme(colors.gray.400)] dark:text-white dark:placeholder:text-gray-500 dark:disabled:text-gray-400 dark:disabled:[-webkit-text-fill-color:theme(colors.gray.400)] dark:disabled:placeholder:[-webkit-text-fill-color:theme(colors.gray.500)] sm:text-sm sm:leading-6"
-        rows="5"
-    ></textarea>
+wire:model="sale_note" 
+class="block w-full border-none bg-transparent px-3 py-1.5 text-base text-gray-950 placeholder:text-gray-400 focus:ring-0 disabled:text-gray-500 disabled:[-webkit-text-fill-color:theme(colors.gray.500)] disabled:placeholder:[-webkit-text-fill-color:theme(colors.gray.400)] dark:text-white dark:placeholder:text-gray-500 dark:disabled:text-gray-400 dark:disabled:[-webkit-text-fill-color:theme(colors.gray.400)] dark:disabled:placeholder:[-webkit-text-fill-color:theme(colors.gray.500)] sm:text-sm sm:leading-6"
+rows="5"
+></textarea>
 </x-filament::input.wrapper>
 </div> 
 <div class="w-1/2"> 
 <label for="">Staff Note</label>
 <x-filament::input.wrapper :valid="! $errors->has('staffnote')">
 <textarea 
-        wire:model="staffnote" 
-        class="block w-full border-none bg-transparent px-3 py-1.5 text-base text-gray-950 placeholder:text-gray-400 focus:ring-0 disabled:text-gray-500 disabled:[-webkit-text-fill-color:theme(colors.gray.500)] disabled:placeholder:[-webkit-text-fill-color:theme(colors.gray.400)] dark:text-white dark:placeholder:text-gray-500 dark:disabled:text-gray-400 dark:disabled:[-webkit-text-fill-color:theme(colors.gray.400)] dark:disabled:placeholder:[-webkit-text-fill-color:theme(colors.gray.500)] sm:text-sm sm:leading-6"
-        rows="5"
-    ></textarea>
+wire:model="staffnote" 
+class="block w-full border-none bg-transparent px-3 py-1.5 text-base text-gray-950 placeholder:text-gray-400 focus:ring-0 disabled:text-gray-500 disabled:[-webkit-text-fill-color:theme(colors.gray.500)] disabled:placeholder:[-webkit-text-fill-color:theme(colors.gray.400)] dark:text-white dark:placeholder:text-gray-500 dark:disabled:text-gray-400 dark:disabled:[-webkit-text-fill-color:theme(colors.gray.400)] dark:disabled:placeholder:[-webkit-text-fill-color:theme(colors.gray.500)] sm:text-sm sm:leading-6"
+rows="5"
+></textarea>
 </x-filament::input.wrapper>
 </div> 
 </div>
@@ -264,44 +254,44 @@ PAID WITH {{ $paidby }}
 Finalise Payment
 </x-slot>
 
-  
+
 <x-filament::input
-    type="hidden"
-    wire:model="received"
+type="hidden"
+wire:model="received"
 /> 
 
 <x-filament::input
-    type="hidden"
-    wire:model="paying"
+type="hidden"
+wire:model="paying"
 />
 
 <x-filament::input
-    type="hidden"
-    wire:model="change"
+type="hidden"
+wire:model="change"
 />
 
 
 <x-filament::input
-    type="hidden"
-    wire:model="paidby"
+type="hidden"
+wire:model="paidby"
 />
 
 <x-filament::input
-    type="hidden"
-    wire:model="payment_note"
+type="hidden"
+wire:model="payment_note"
 />
 
 <x-filament::input
-    type="hidden"
-    wire:model="sale_note"
+type="hidden"
+wire:model="sale_note"
 />
 
 <x-filament::input
-    type="hidden"
-    wire:model="staffnote"
+type="hidden"
+wire:model="staffnote"
 />
 <p class="text-center">
-    {{ $paidby }} <br>
+{{ $paidby }} <br>
 Are you sure you would like to do this?
 </p>
 
@@ -402,7 +392,7 @@ d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 
 </div>
 
 <!-- SHOW POS SIDE IMAGES -->
-    @include('livewire.pos-side-image',['allproducts' => $allproducts])
+@include('livewire.pos-side-image',['allproducts' => $allproducts])
 <!-- END SHOW POS SIDE IMAGES -->
 
 
@@ -412,7 +402,7 @@ d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 
 <div class="flex space-x-3 justify-left">
 
 <x-filament::button color="success" icon="heroicon-o-credit-card" wire:click="openpaywithcashmodal('CREDIT CARD')" outlined> 
-      CREDIT CARD
+CREDIT CARD
 </x-filament::button>
 
 <x-filament::button color="warning" icon="heroicon-o-currency-dollar" wire:click="openpaywithcreditsalesmodal('CREDIT SALES')">
@@ -437,13 +427,13 @@ DRAFT
 </x-filament::button>
 
 <x-filament::button color="success" icon="heroicon-o-home-modern" wire:click="openpaywithcashmodal('BANK TRANSFER')"> 
-        BANK TRANSFER
+BANK TRANSFER
 </x-filament::button>
 
-    <x-filament::button color="danger" icon="heroicon-o-x-circle"  href="/pos"
-    tag="a" outlined> 
-            CANCEL
-    </x-filament::button>
+<x-filament::button color="danger" icon="heroicon-o-x-circle"  href="/pos"
+tag="a" outlined> 
+CANCEL
+</x-filament::button>
 </div>
 </div>
 </div>
@@ -452,280 +442,291 @@ DRAFT
 
 <!-- Cash register model -->
 <x-filament::modal id="cash-register-details" width="4xl" sticky-header class="z-50">
-    <x-slot name="heading">
-        Register Details From {{ date('Y-m-d', strtotime($this->cash_register->created_at)) }} - {{ date('Y-m-d', strtotime(now())) }}
-    </x-slot>
-    <x-filament-tables::container>
-        <x-filament-tables::table>
-            <x-slot:header>
-                <x-filament-tables::header-cell>
-                    Payment Method
-                </x-filament-tables::header-cell>
-                <x-filament-tables::header-cell>
-                    Sales
-                </x-filament-tables::header-cell>
-                <x-filament-tables::header-cell>
-                    Expenses
-                </x-filament-tables::header-cell>
-            </x-slot:header>
-                
-            @php
-                $total = 0;
-                $totalsale = 0;
-            @endphp
+<x-slot name="heading">
+Register Details From {{ date('d-M-Y', strtotime($this->cash_register->created_at)) }} To {{ date('d-M-Y', strtotime(now())) }}
+</x-slot>
+<x-filament-tables::container>
+<x-filament-tables::table>
+<x-slot:header>
+<x-filament-tables::header-cell>
+Payment Method
+</x-filament-tables::header-cell>
+<x-filament-tables::header-cell>
+Sales
+</x-filament-tables::header-cell>
+<x-filament-tables::header-cell>
+Expenses
+</x-filament-tables::header-cell>
+</x-slot:header>
 
-                <x-filament-tables::row>
-                    <x-filament-tables::cell>
-                        Cash in hand:
-                    </x-filament-tables::cell>
-                    <x-filament-tables::cell>
-                        @php
-                            $total += $this->cash_register->cash_in_hand ?? 0;
-                        @endphp
-                    GHC {{ number_format($this->cash_register->cash_in_hand ?? 0,2) }}
-                    </x-filament-tables::cell>
-                    <x-filament-tables::cell>
-                       ---
-                    </x-filament-tables::cell>
-                </x-filament-tables::row>
+@php
+$total = 0;
+$totalsale = 0;
+@endphp
 
-                <x-filament-tables::row>
-                    <x-filament-tables::cell>
-                        Cash payment:
-                    </x-filament-tables::cell>
-                    <x-filament-tables::cell>
-                        @if (isset($this->salesSummary['CASH']))
-                            @php
-                                $total += $this->salesSummary['CASH'];
-                                $totalsale += $this->salesSummary['CASH'];
-                            @endphp
-                            GHC {{ number_format($this->salesSummary['CASH'],2) }}</p>
-                        @else
-                        GHC {{ number_format(0,2) }}
-                        @endif
-                    </x-filament-tables::cell>
-                    <x-filament-tables::cell>
-                    GHC {{ number_format(0,2) }}
-                    </x-filament-tables::cell>
-                </x-filament-tables::row>
+<x-filament-tables::row>
+<x-filament-tables::cell>
+Cash in hand:
+</x-filament-tables::cell>
+<x-filament-tables::cell>
+@php
+$total += $this->cash_register->cash_in_hand ?? 0;
+@endphp
+GHC {{ number_format($this->cash_register->cash_in_hand ?? 0,2) }}
+</x-filament-tables::cell>
+<x-filament-tables::cell>
+---
+</x-filament-tables::cell>
+</x-filament-tables::row>
 
-                <x-filament-tables::row>
-                    <x-filament-tables::cell>
-                        Cheque payment:
-                    </x-filament-tables::cell>
-                    <x-filament-tables::cell>
-                        @if (isset($this->salesSummary['CHEQUE']))
-                            @php
-                                $total += $this->salesSummary['CHEQUE'];
-                                $totalsale += $this->salesSummary['CHEQUE'];
-                            @endphp
-                            GHC {{ number_format($this->salesSummary['CHEQUE'],2) }}</p>
-                        @else
-                        GHC {{ number_format(0,2) }}
-                        @endif
-                    </x-filament-tables::cell>
-                    <x-filament-tables::cell>
-                    GHC {{ number_format(0,2) }}
-                    </x-filament-tables::cell>
-                </x-filament-tables::row>
+<x-filament-tables::row>
+<x-filament-tables::cell>
+Cash payment:
+</x-filament-tables::cell>
+<x-filament-tables::cell>
+@if (isset($this->salesSummary['CASH']))
+@php
+$total += $this->salesSummary['CASH'];
+$totalsale += $this->salesSummary['CASH'];
+@endphp
+GHC {{ number_format($this->salesSummary['CASH'],2) }}</p>
+@else
+GHC {{ number_format(0,2) }}
+@endif
+</x-filament-tables::cell>
+<x-filament-tables::cell>
+GHC {{ number_format(0,2) }}
+</x-filament-tables::cell>
+</x-filament-tables::row>
 
-                <x-filament-tables::row>
-                    <x-filament-tables::cell>
-                        Paypal payment:
-                    </x-filament-tables::cell>
-                    <x-filament-tables::cell>
-                        @if (isset($this->salesSummary['PAYPAL']))
-                            @php
-                                $total += $this->salesSummary['PAYPAL'];
-                                $totalsale += $this->salesSummary['PAYPAL'];
-                            @endphp
-                            GHC {{ number_format($this->salesSummary['PAYPAL'],2) }}</p>
-                        @else
-                        GHC {{ number_format(0,2) }}
-                        @endif
-                    </x-filament-tables::cell>
-                    <x-filament-tables::cell>
-                    GHC {{ number_format(0,2) }}
-                    </x-filament-tables::cell>
-                </x-filament-tables::row>
+<x-filament-tables::row>
+<x-filament-tables::cell>
+Cheque payment:
+</x-filament-tables::cell>
+<x-filament-tables::cell>
+@if (isset($this->salesSummary['CHEQUE']))
+@php
+$total += $this->salesSummary['CHEQUE'];
+$totalsale += $this->salesSummary['CHEQUE'];
+@endphp
+GHC {{ number_format($this->salesSummary['CHEQUE'],2) }}</p>
+@else
+GHC {{ number_format(0,2) }}
+@endif
+</x-filament-tables::cell>
+<x-filament-tables::cell>
+GHC {{ number_format(0,2) }}
+</x-filament-tables::cell>
+</x-filament-tables::row>
 
-                <x-filament-tables::row>
-                    <x-filament-tables::cell>
-                        Gift card payment:
-                    </x-filament-tables::cell>
-                    <x-filament-tables::cell>
-                        @if (isset($this->salesSummary['GIFT CARD']))
-                            @php
-                                $total += $this->salesSummary['GIFT CARD'];
-                                $totalsale += $this->salesSummary['GIFT CARD'];
-                            @endphp
-                            GHC {{ number_format($this->salesSummary['GIFT CARD'],2) }}</p>
-                        @else
-                        GHC {{ number_format(0,2) }}
-                        @endif
-                    </x-filament-tables::cell>
-                    <x-filament-tables::cell>
-                    GHC {{ number_format(0,2) }}
-                    </x-filament-tables::cell>
-                </x-filament-tables::row>
+<x-filament-tables::row>
+<x-filament-tables::cell>
+Paypal payment:
+</x-filament-tables::cell>
+<x-filament-tables::cell>
+@if (isset($this->salesSummary['PAYPAL']))
+@php
+$total += $this->salesSummary['PAYPAL'];
+$totalsale += $this->salesSummary['PAYPAL'];
+@endphp
+GHC {{ number_format($this->salesSummary['PAYPAL'],2) }}</p>
+@else
+GHC {{ number_format(0,2) }}
+@endif
+</x-filament-tables::cell>
+<x-filament-tables::cell>
+GHC {{ number_format(0,2) }}
+</x-filament-tables::cell>
+</x-filament-tables::row>
 
-                <x-filament-tables::row>
-                    <x-filament-tables::cell>
-                        Credit card payment:
-                    </x-filament-tables::cell>
-                    <x-filament-tables::cell>
-                        @if (isset($this->salesSummary['CREDIT CARD']))
-                            @php
-                                $total += $this->salesSummary['CREDIT CARD'];
-                                $totalsale += $this->salesSummary['CREDIT CARD'];
-                            @endphp
-                            GHC {{ number_format($this->salesSummary['CREDIT CARD'],2) }}</p>
-                        @else
-                        GHC {{ number_format(0,2) }}
-                        @endif
-                    </x-filament-tables::cell>
-                    <x-filament-tables::cell>
-                    GHC {{ number_format(0,2) }}
-                    </x-filament-tables::cell>
-                </x-filament-tables::row>
-
-                <x-filament-tables::row>
-                    <x-filament-tables::cell>
-                        Bank transfer payment:
-                    </x-filament-tables::cell>
-                    <x-filament-tables::cell>
-                        @if (isset($this->salesSummary['BANK TRANSFER']))
-                            @php
-                                $total += $this->salesSummary['BANK TRANSFER'];
-                                $totalsale += $this->salesSummary['BANK TRANSFER'];
-                            @endphp
-                            GHC {{ number_format($this->salesSummary['BANK TRANSFER'],2) }}</p>
-                        @else
-                        GHC {{ number_format(0,2) }}
-                        @endif
-                    </x-filament-tables::cell>
-                    <x-filament-tables::cell>
-                    GHC {{ number_format(0,2) }}
-                    </x-filament-tables::cell>
-                </x-filament-tables::row>
-                
-                <x-filament-tables::row style="background-color: #5cb85c; color: white;">
-                    <x-filament-tables::cell>
-                    Total Sales:
-                    </x-filament-tables::cell>
-
-                    <x-filament-tables::cell colspan="2">
-                    GHC {{ number_format($total,2) }}
-                    </x-filament-tables::cell>
-            </x-filament-tables::row>
-
-        </x-filament-tables::table>
-
-        <hr style="margin-top: 20px; margin-bottom: 20px;">
-
-        <x-filament-tables::table>
+<x-filament-tables::row>
+<x-filament-tables::cell>
+Gift card payment:
+    </x-filament-tables::cell>
+    <x-filament-tables::cell>
+    @if (isset($this->salesSummary['GIFT CARD']))
+    @php
+    $total += $this->salesSummary['GIFT CARD'];
+    $totalsale += $this->salesSummary['GIFT CARD'];
+    @endphp
+    GHC {{ number_format($this->salesSummary['GIFT CARD'],2) }}</p>
+    @else
+    GHC {{ number_format(0,2) }}
+    @endif
+    </x-filament-tables::cell>
+    <x-filament-tables::cell>
+    GHC {{ number_format(0,2) }}
+    </x-filament-tables::cell>
+    </x-filament-tables::row>
     
-            <x-filament-tables::row style="background-color: #337ab7; color: white;">
-                <x-filament-tables::cell>
-                   Total Refund:
-                </x-filament-tables::cell>
-                <x-filament-tables::cell>
-                GHC {{ number_format(0,2) }}
-                </x-filament-tables::cell>
-            </x-filament-tables::row>
-
-            <x-filament-tables::row style="background-color: #5cb85c; color: white;">
-                <x-filament-tables::cell>
-                   Total Payments:
-                </x-filament-tables::cell>
-                <x-filament-tables::cell>
-                GHC {{ number_format($totalsale,2) }}
-                </x-filament-tables::cell>
-            </x-filament-tables::row>
-
-            <x-filament-tables::row style="background-color: #c9302c; color: white;">
-                <x-filament-tables::cell>
-                   Total Expenses:
-                </x-filament-tables::cell>
-                <x-filament-tables::cell>
-                GHC {{ number_format(0,2) }}
-                </x-filament-tables::cell>
-            </x-filament-tables::row>
-        </x-filament-tables::table>
-</x-filament-tables::container>
-
-<hr style="margin-top: 20px; margin-bottom: 20px;">
-
-<x-filament::section
-        icon="heroicon-m-truck"
-        icon-size="md"
-    >
-        <x-slot name="heading">
-            Details of product sold
-        </x-slot>
-
-        <x-filament-tables::container>
-        <x-filament-tables::table>
-            <x-slot:header>
-                <x-filament-tables::header-cell>
-                    Brand
-                </x-filament-tables::header-cell>
-                <x-filament-tables::header-cell>
-                    Quantity
-                </x-filament-tables::header-cell>
-                <x-filament-tables::header-cell>
-                    Total Amount
-                </x-filament-tables::header-cell>
-            </x-slot:header>
-            @php
-                $totqty = 0;
-                $totpx = 0;
-            @endphp
-
-            @foreach ($this->salesbrandSummary ?? [] as $brand => $totalQty)
-                <x-filament-tables::row>
-                    <x-filament-tables::cell>
-                       {{ $brand }}
-                    </x-filament-tables::cell>
-                    <x-filament-tables::cell>
-                        @php
-                            $tot = explode(",",$totalQty);
-                            $totqty += $tot[0];
-                            $totpx += $tot[1];
-                        @endphp
-                         {{ $tot[0] }}
-                    </x-filament-tables::cell>
-                    <x-filament-tables::cell>
-                       GHC {{ number_format($tot[1],2) }}
-                    </x-filament-tables::cell>
-                </x-filament-tables::row>
-            @endforeach
-
-                <x-filament-tables::row style="background-color: red;color: white;"> 
-                    <x-filament-tables::cell>
-                       #
-                    </x-filament-tables::cell>
-                    <x-filament-tables::cell>
-                        {{ $totqty }}
-                    </x-filament-tables::cell>
-                    <x-filament-tables::cell>
-                       GHC {{ number_format($totpx,2) }}
-                    </x-filament-tables::cell>
-                </x-filament-tables::row>
-        </x-filament-tables::table>
+    <x-filament-tables::row>
+    <x-filament-tables::cell>
+    Credit card payment:
+    </x-filament-tables::cell>
+    <x-filament-tables::cell>
+    @if (isset($this->salesSummary['CREDIT CARD']))
+    @php
+    $total += $this->salesSummary['CREDIT CARD'];
+    $totalsale += $this->salesSummary['CREDIT CARD'];
+    @endphp
+    GHC {{ number_format($this->salesSummary['CREDIT CARD'],2) }}</p>
+    @else
+    GHC {{ number_format(0,2) }}
+    @endif
+    </x-filament-tables::cell>
+    <x-filament-tables::cell>
+    GHC {{ number_format(0,2) }}
+    </x-filament-tables::cell>
+    </x-filament-tables::row>
+    
+    <x-filament-tables::row>
+    <x-filament-tables::cell>
+    Bank transfer payment:
+    </x-filament-tables::cell>
+    <x-filament-tables::cell>
+    @if (isset($this->salesSummary['BANK TRANSFER']))
+    @php
+    $total += $this->salesSummary['BANK TRANSFER'];
+    $totalsale += $this->salesSummary['BANK TRANSFER'];
+    @endphp
+    GHC {{ number_format($this->salesSummary['BANK TRANSFER'],2) }}</p>
+    @else
+    GHC {{ number_format(0,2) }}
+    @endif
+    </x-filament-tables::cell>
+    <x-filament-tables::cell>
+    GHC {{ number_format(0,2) }}
+    </x-filament-tables::cell>
+    </x-filament-tables::row>
+    
+    <x-filament-tables::row style="background-color: #5cb85c; color: white;">
+    <x-filament-tables::cell>
+    Total Sales:
+    </x-filament-tables::cell>
+    
+    <x-filament-tables::cell colspan="2">
+    GHC {{ number_format($total,2) }}
+    </x-filament-tables::cell>
+    </x-filament-tables::row>
+    
+    </x-filament-tables::table>
+    
+    <hr style="margin-top: 20px; margin-bottom: 20px;">
+    
+    <x-filament-tables::table>
+    
+    <x-filament-tables::row style="background-color: #337ab7; color: white;">
+    <x-filament-tables::cell>
+    Total Refund:
+    </x-filament-tables::cell>
+    <x-filament-tables::cell>
+    GHC {{ number_format(0,2) }}
+    </x-filament-tables::cell>
+    </x-filament-tables::row>
+    
+    <x-filament-tables::row style="background-color: #5cb85c; color: white;">
+    <x-filament-tables::cell>
+    Total Payments:
+    </x-filament-tables::cell>
+    <x-filament-tables::cell>
+    GHC {{ number_format($totalsale,2) }}
+    </x-filament-tables::cell>
+    </x-filament-tables::row>
+    
+    <x-filament-tables::row style="background-color: #c9302c; color: white;">
+    <x-filament-tables::cell>
+    Total Expenses:
+    </x-filament-tables::cell>
+    <x-filament-tables::cell>
+    GHC {{ number_format(0,2) }}
+    </x-filament-tables::cell>
+    </x-filament-tables::row>
+    </x-filament-tables::table>
     </x-filament-tables::container>
-</x-filament::section>
-
-    <x-slot name="footer">
-        <x-filament::button>
-         Print
-        </x-filament::button>
+    
+    <hr style="margin-top: 20px; margin-bottom: 20px;">
+    
+    <x-filament::section
+    icon="heroicon-m-truck"
+    icon-size="md"
+    >
+    <x-slot name="heading">
+    Details of product sold
     </x-slot>
-</x-filament::modal>
+    
+    <x-filament-tables::container>
+    <x-filament-tables::table>
+    <x-slot:header>
+    <x-filament-tables::header-cell>
+    Brand
+    </x-filament-tables::header-cell>
+    <x-filament-tables::header-cell>
+    Quantity
+    </x-filament-tables::header-cell>
+    <x-filament-tables::header-cell>
+    Total Amount
+    </x-filament-tables::header-cell>
+    </x-slot:header>
+    @php
+    $totqty = 0;
+    $totpx = 0;
+    @endphp
+    
+    @foreach ($this->salesbrandSummary ?? [] as $brand => $totalQty)
+    <x-filament-tables::row>
+    <x-filament-tables::cell>
+    {{ $brand }}
+    </x-filament-tables::cell>
+    <x-filament-tables::cell>
+    @php
+    $tot = explode(",",$totalQty);
+    $totqty += $tot[0];
+    $totpx += $tot[1];
+    @endphp
+    {{ $tot[0] }}
+    </x-filament-tables::cell>
+    <x-filament-tables::cell>
+    GHC {{ number_format($tot[1],2) }}
+    </x-filament-tables::cell>
+    </x-filament-tables::row>
+    @endforeach
+    
+    <x-filament-tables::row style="background-color: red;color: white;"> 
+    <x-filament-tables::cell>
+    #
+    </x-filament-tables::cell>
+    <x-filament-tables::cell>
+    {{ $totqty }}
+    </x-filament-tables::cell>
+    <x-filament-tables::cell>
+    GHC {{ number_format($totpx,2) }}
+    </x-filament-tables::cell>
+    </x-filament-tables::row>
+    </x-filament-tables::table>
+    </x-filament-tables::container>
+    </x-filament::section>
+    
+    <x-slot name="footer">
+        <div class="flex gap-x-5">
 
+            <x-filament::button color="success" icon="heroicon-o-receipt-percent" outline>
+                Print
+            </x-filament::button>
 
+            @if ($this->registertype == "close")
 
-
-
-
-</div>
+                <x-filament::button wire:click="closeregister" color="danger" icon="heroicon-o-x-circle" outline>
+                    Close register
+                </x-filament::button>
+                
+            @endif
+        </div>
+    </x-slot>
+    </x-filament::modal>
+    
+    
+    
+    
+    
+    
+    </div>

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->bigInteger('user_id');
             $table->bigInteger('warehouse_id');
             $table->boolean('status')->default(false);
+            $table->date('closed_at')->nullable();
             $table->timestamps();
         });
     }

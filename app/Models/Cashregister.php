@@ -10,4 +10,10 @@ class Cashregister extends Model
     use HasFactory;
 
     protected $guarded = ["id"];
+
+
+    public function warehouse()
+    {
+        return $this->belongsTo(Warehouse::class,"warehouse_id");
+    }
 }

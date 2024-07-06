@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Filament\CustomForm\Autocomplete;
+use App\Livewire\Components\ScanproductField;
 use App\Models\Clients;
 use App\Models\Coupon;
 use App\Models\Giftcard;
@@ -15,6 +16,7 @@ use Filament\Actions\ActionGroup;
 use Filament\Forms;
 use Filament\Forms\Components\Actions;
 use Filament\Forms\Components\Actions\Action;
+use Filament\Forms\Components\Livewire;
 use Filament\Notifications\Notification;
 use Livewire\Component;
 use Icetalker\FilamentTableRepeater\Forms\Components\TableRepeater;

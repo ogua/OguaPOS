@@ -43,18 +43,6 @@ class CreateSales extends CreateRecord
 
     public $bankname = ""; 
     public $accountnumber = "";
-
-    protected function getCreateAnotherFormAction(): Action
-    {
-        return parent::getCreateAnotherFormAction()
-        ->submit(null)
-        ->requiresConfirmation()
-        ->action(function(){
-            $this->closeActionModal();
-            $this->create();
-        });
-    }
-    
     
     protected function getRedirectUrl(): string
     {

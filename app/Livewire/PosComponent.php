@@ -89,6 +89,8 @@ class PosComponent extends Component implements HasForms
 
     public $payingaccount;
     public $account_id = "";
+
+    public $registertype = "";
     
     public function mount() {
         
@@ -556,11 +558,15 @@ class PosComponent extends Component implements HasForms
         ->send();
     }
 
-    public function opencashregister() {
-        $date = date('Y-m-d', strtotime($this->cash_register->created_at));
+
+    function cashregistercode()
+    {
+        $datefrom = date('Y-m-d', strtotime($this->cash_register->created_at));
+        $dateto = date('Y-m-d');
 
 
         $salesSummary = DB::table('sales')
+        ->whereBetween('sales.created_at',[$datefrom,$dateto])
         ->join('payments', 'sales.id', '=', 'payments.sale_id')
         ->where('sales.cash_register_id',$this->cash_register->id)
         ->select('payments.paying_method', DB::raw('SUM(payments.amount) as total_amount'))
@@ -574,6 +580,7 @@ class PosComponent extends Component implements HasForms
 
         
         $salesbrandSummary = DB::table('sales')
+            ->whereBetween('sales.created_at',[$datefrom,$dateto])
             ->join('sales_items', 'sales.id', '=', 'sales_items.sale_id')
             ->join('products', 'sales_items.product_id', '=', 'products.id')
             ->leftJoin('brands', 'products.brand_id', '=', 'brands.id')
@@ -593,12 +600,38 @@ class PosComponent extends Component implements HasForms
             
 
         $this->salesbrandSummary = $salesSummaryArray;
+        
+    }
 
+    public function opencashregister() {
+        $this->cashregistercode();
+
+        $this->registertype = "create";
         $this->dispatch('open-modal', id: 'cash-register-details');
     }
 
     public function closecashregister() {
+         $this->cashregistercode();
+         $this->registertype = "close";
          $this->dispatch('open-modal', id: 'cash-register-details');
+    }
+
+    public function closeregister(){
+
+        Cashregister::where('user_id',auth()->user()->id)
+        ->where('warehouse_id',$this->data["warehouse_id"])
+        ->update(['status' => false, 'closed_at' => date('Y-m-d')]);
+
+        $this->dispatch('play-sound');
+                    
+        Notification::make()
+        ->title('Close successfully!')
+        ->body("Cash register close at ".date('Y-m-d'))
+        ->success()
+        ->send();
+
+        $this->dispatch('close-modal', id: 'cash-register-details');
+        
     }
     
     public function openpaywithcashmodal($payby)
