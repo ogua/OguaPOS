@@ -90,7 +90,7 @@ class PossettingsResource extends Resource
                 Forms\Components\Toggle::make('status')
                     ->required(),
 
-                Forms\Components\hidden::make('user_id')
+                Forms\Components\Hidden::make('user_id')
                 ->default(auth()->user()->id)
 
                     
