@@ -2,7 +2,6 @@
 
 namespace App\Providers\Filament;
 
-use App\Filament\Pages\Auth\CashierLogin;
 use App\Filament\Pages\Dashboard;
 use App\Filament\Pages\Auth\EditProfile;
 use App\Filament\Pages\Tenancy\RegisterWarehouse;
@@ -32,12 +31,11 @@ class AdminPanelProvider extends PanelProvider
     {
         return $panel
         ->default()
-        ->profile()
         ->id('admin')
         ->path('admin')
+        ->profile(EditProfile::class)
+        ->login()
         ->navigation(request()->routeIs('filament.admin.resources.sales.pos.create') ? false : true)
-       // ->login()
-        ->login(CashierLogin::class)
         ->passwordReset()
         ->unsavedChangesAlerts()
         ->sidebarCollapsibleOnDesktop()

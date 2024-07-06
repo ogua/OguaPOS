@@ -7,6 +7,8 @@ use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
 use Filament\Pages;
 use Filament\Panel;
+use App\Filament\Pages\Auth\CashierLogin;
+use App\Filament\Pages\Auth\EditProfile;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
 use Filament\Widgets;
@@ -25,8 +27,8 @@ class CashierPanelProvider extends PanelProvider
         return $panel
             ->id('cashier')
             ->path('cashier')
-            ->login()
-            ->profile()
+            ->login(CashierLogin::class)
+            ->profile(EditProfile::class)
             ->passwordReset()
             ->unsavedChangesAlerts()
             ->sidebarCollapsibleOnDesktop()
