@@ -16,12 +16,12 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Collection;
 
-class User extends Authenticatable implements FilamentUser, HasTenants, HasAvatar
+class User extends Authenticatable implements FilamentUser, HasAvatar
 {
     use HasApiTokens, HasFactory, Notifiable;
 
     /**
-     * The attributes that are mass assignable.
+     * The attributes that are mass assignable. HasTenants
      *
      * @var array<int, string>
      */
@@ -69,10 +69,10 @@ class User extends Authenticatable implements FilamentUser, HasTenants, HasAvata
         return $this->warehouse;
     }
  
-    public function canAccessTenant(Model $tenant): bool
-    {
-        return $this->warehouse()->whereKey($tenant)->exists();
-    }
+    // public function canAccessTenant(Model $tenant): bool
+    // {
+    //     return $this->warehouse()->whereKey($tenant)->exists();
+    // }
 
     public function canAccessPanel(Panel $panel): bool
     {
