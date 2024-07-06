@@ -26,6 +26,14 @@ class CashierPanelProvider extends PanelProvider
             ->id('cashier')
             ->path('cashier')
             ->login()
+            ->profile()
+            ->passwordReset()
+            ->unsavedChangesAlerts()
+            ->sidebarCollapsibleOnDesktop()
+            ->brandLogo(asset('images/logo.png'))
+            ->brandLogoHeight(300)
+            ->brandLogoHeight('3rem')
+            ->favicon(asset('images/logo.png'))
             ->colors([
                 'primary' => Color::Amber,
             ])

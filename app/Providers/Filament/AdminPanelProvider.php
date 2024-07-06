@@ -32,9 +32,7 @@ class AdminPanelProvider extends PanelProvider
     {
         return $panel
         ->default()
-       // ->tenant(Warehouse::class)
-       // ->tenantRegistration(RegisterWarehouse::class)
-        ->profile(EditProfile::class)
+        ->profile()
         ->id('admin')
         ->path('admin')
         ->navigation(request()->routeIs('filament.admin.resources.sales.pos.create') ? false : true)
