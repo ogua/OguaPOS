@@ -160,6 +160,7 @@ return [
          * Package Service Providers...
          */
         Milon\Barcode\BarcodeServiceProvider::class,
+        App\Providers\SalesPosProvider::class,
 
         /*
          * Application Service Providers...
