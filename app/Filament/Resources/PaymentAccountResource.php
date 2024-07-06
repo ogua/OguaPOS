@@ -51,6 +51,10 @@ class PaymentAccountResource extends Resource
                         ->prefix(auth()->user()->pos?->currncy?->currency_code ?? 'GHC')
                         ->required()
                         ->numeric(),
+                        
+                    Forms\Components\Hidden::make('current_balance')
+                    ->default(0),
+                        
                     Forms\Components\KeyValue::make('account_details')
                         ->addActionLabel('Add detail')
                         ->keyLabel('Label')

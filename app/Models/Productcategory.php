@@ -14,7 +14,12 @@ class Productcategory extends Model
 
     public function products()
     {
-        return $this->hasMany(Product::class,"");
+        return $this->hasMany(Product::class,"product_category_id");
+    }
+
+    public function product()
+    {
+        return $this->hasOne(Product::class,"product_category_id");
     }
 
     public function owner(): BelongsTo

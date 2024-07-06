@@ -32,7 +32,7 @@ class SalesPolicy
      */
     public function create(User $user): bool
     {
-        return auth()->user()->role == 'admin';
+        return true;
     }
 
     /**
@@ -48,7 +48,7 @@ class SalesPolicy
      */
     public function delete(User $user, Sales $sales): bool
     {
-        return true;
+        return auth()->user()->role == 'admin';
     }
 
     /**

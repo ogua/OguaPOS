@@ -1,0 +1,16 @@
+ln -s /usr/bin/php/home/u843865130/domains/oguaschoolz.com/oguaschoolz/oguapos/public /usr/bin/php/home/u843865130/domains/oguaschoolz.com/oguaschoolz/oguapos/default.php
+
+
+ln -s /home/u843865130/domains/oguaschoolz.com/oguaschoolz/oguapos/public /home/u843865130/domains/oguaschoolz.com/oguaschoolz/public/pos
+
+/home/u843865130/domains/oguaschoolz.com/public_html/pos
+
+ln -s /home/u843865130/domains/oguaschoolz.com/oguaschoolz/oguapos/public storage
+
+
+ln -s /home/u843865130/domains/oguaschoolz.com/oguaschoolz/oguapos/storage/app/public storage
+
+
+ln -s /home/u843865130/domains/oguaschoolz.com/public_html/pos
+
+ls -l /home/u843865130/domains/oguaschoolz.com/oguaschoolz/public/oguapos/public

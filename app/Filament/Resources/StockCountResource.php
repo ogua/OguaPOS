@@ -5,7 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\StockCountResource\Pages;
 use App\Filament\Resources\StockCountResource\RelationManagers;
 use App\Models\Productcategory;
-use App\Models\StockCount;
+use App\Models\Stockcount;
 use App\Models\Warehouse;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -17,7 +17,7 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class StockCountResource extends Resource
 {
-    protected static ?string $model = StockCount::class;
+    protected static ?string $model = Stockcount::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-shopping-cart';
     protected static ?string $slug = 'products/stock-count';

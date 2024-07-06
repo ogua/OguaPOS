@@ -779,6 +779,16 @@ class ComposerStaticInit9c491b8531eec05ba41a11d9276a5749
         ),
     );
 
+    public static $prefixesPsr0 = array (
+        'M' => 
+        array (
+            'Milon\\Barcode' => 
+            array (
+                0 => __DIR__ . '/..' . '/milon/barcode/src',
+            ),
+        ),
+    );
+
     public static $classMap = array (
         'AnourValar\\EloquentSerialize\\Facades\\EloquentSerializeFacade' => __DIR__ . '/..' . '/anourvalar/eloquent-serialize/src/Facades/EloquentSerializeFacade.php',
         'AnourValar\\EloquentSerialize\\Grammars\\EloquentBuilderGrammar' => __DIR__ . '/..' . '/anourvalar/eloquent-serialize/src/Grammars/EloquentBuilderGrammar.php',
@@ -788,14 +798,58 @@ class ComposerStaticInit9c491b8531eec05ba41a11d9276a5749
         'AnourValar\\EloquentSerialize\\Service' => __DIR__ . '/..' . '/anourvalar/eloquent-serialize/src/Service.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
+        'App\\Filament\\Cashier\\Resources\\BrandResource' => __DIR__ . '/../..' . '/app/Filament/Cashier/Resources/BrandResource.php',
+        'App\\Filament\\Cashier\\Resources\\BrandResource\\Pages\\CreateBrand' => __DIR__ . '/../..' . '/app/Filament/Cashier/Resources/BrandResource/Pages/CreateBrand.php',
+        'App\\Filament\\Cashier\\Resources\\BrandResource\\Pages\\EditBrand' => __DIR__ . '/../..' . '/app/Filament/Cashier/Resources/BrandResource/Pages/EditBrand.php',
+        'App\\Filament\\Cashier\\Resources\\BrandResource\\Pages\\ListBrands' => __DIR__ . '/../..' . '/app/Filament/Cashier/Resources/BrandResource/Pages/ListBrands.php',
         'App\\Filament\\Cashier\\Resources\\CashregisterResource' => __DIR__ . '/../..' . '/app/Filament/Cashier/Resources/CashregisterResource.php',
         'App\\Filament\\Cashier\\Resources\\CashregisterResource\\Pages\\CreateCashregister' => __DIR__ . '/../..' . '/app/Filament/Cashier/Resources/CashregisterResource/Pages/CreateCashregister.php',
         'App\\Filament\\Cashier\\Resources\\CashregisterResource\\Pages\\EditCashregister' => __DIR__ . '/../..' . '/app/Filament/Cashier/Resources/CashregisterResource/Pages/EditCashregister.php',
         'App\\Filament\\Cashier\\Resources\\CashregisterResource\\Pages\\ListCashregisters' => __DIR__ . '/../..' . '/app/Filament/Cashier/Resources/CashregisterResource/Pages/ListCashregisters.php',
+        'App\\Filament\\Cashier\\Resources\\DeliveriesResource' => __DIR__ . '/../..' . '/app/Filament/Cashier/Resources/DeliveriesResource.php',
+        'App\\Filament\\Cashier\\Resources\\DeliveriesResource\\Pages\\CreateDeliveries' => __DIR__ . '/../..' . '/app/Filament/Cashier/Resources/DeliveriesResource/Pages/CreateDeliveries.php',
+        'App\\Filament\\Cashier\\Resources\\DeliveriesResource\\Pages\\EditDeliveries' => __DIR__ . '/../..' . '/app/Filament/Cashier/Resources/DeliveriesResource/Pages/EditDeliveries.php',
+        'App\\Filament\\Cashier\\Resources\\DeliveriesResource\\Pages\\ListDeliveries' => __DIR__ . '/../..' . '/app/Filament/Cashier/Resources/DeliveriesResource/Pages/ListDeliveries.php',
+        'App\\Filament\\Cashier\\Resources\\DeliveriesResource\\Pages\\ViewDeliveries' => __DIR__ . '/../..' . '/app/Filament/Cashier/Resources/DeliveriesResource/Pages/ViewDeliveries.php',
+        'App\\Filament\\Cashier\\Resources\\InvoiceResource' => __DIR__ . '/../..' . '/app/Filament/Cashier/Resources/InvoiceResource.php',
+        'App\\Filament\\Cashier\\Resources\\InvoiceResource\\Pages\\CreateInvoice' => __DIR__ . '/../..' . '/app/Filament/Cashier/Resources/InvoiceResource/Pages/CreateInvoice.php',
+        'App\\Filament\\Cashier\\Resources\\InvoiceResource\\Pages\\EditInvoice' => __DIR__ . '/../..' . '/app/Filament/Cashier/Resources/InvoiceResource/Pages/EditInvoice.php',
+        'App\\Filament\\Cashier\\Resources\\InvoiceResource\\Pages\\ListInvoices' => __DIR__ . '/../..' . '/app/Filament/Cashier/Resources/InvoiceResource/Pages/ListInvoices.php',
+        'App\\Filament\\Cashier\\Resources\\InvoiceResource\\Pages\\ViewInvoice' => __DIR__ . '/../..' . '/app/Filament/Cashier/Resources/InvoiceResource/Pages/ViewInvoice.php',
+        'App\\Filament\\Cashier\\Resources\\ProductResource' => __DIR__ . '/../..' . '/app/Filament/Cashier/Resources/ProductResource.php',
+        'App\\Filament\\Cashier\\Resources\\ProductResource\\Pages\\CreateProduct' => __DIR__ . '/../..' . '/app/Filament/Cashier/Resources/ProductResource/Pages/CreateProduct.php',
+        'App\\Filament\\Cashier\\Resources\\ProductResource\\Pages\\EditProduct' => __DIR__ . '/../..' . '/app/Filament/Cashier/Resources/ProductResource/Pages/EditProduct.php',
+        'App\\Filament\\Cashier\\Resources\\ProductResource\\Pages\\ListProducts' => __DIR__ . '/../..' . '/app/Filament/Cashier/Resources/ProductResource/Pages/ListProducts.php',
+        'App\\Filament\\Cashier\\Resources\\ProductResource\\Pages\\ManageStock' => __DIR__ . '/../..' . '/app/Filament/Cashier/Resources/ProductResource/Pages/ManageStock.php',
+        'App\\Filament\\Cashier\\Resources\\ProductResource\\Pages\\ProductHistory' => __DIR__ . '/../..' . '/app/Filament/Cashier/Resources/ProductResource/Pages/ProductHistory.php',
+        'App\\Filament\\Cashier\\Resources\\ProductResource\\Pages\\ViewProduct' => __DIR__ . '/../..' . '/app/Filament/Cashier/Resources/ProductResource/Pages/ViewProduct.php',
+        'App\\Filament\\Cashier\\Resources\\ProductResource\\Widgets\\ProductStatistics' => __DIR__ . '/../..' . '/app/Filament/Cashier/Resources/ProductResource/Widgets/ProductStatistics.php',
+        'App\\Filament\\Cashier\\Resources\\ProductcategoryResource' => __DIR__ . '/../..' . '/app/Filament/Cashier/Resources/ProductcategoryResource.php',
+        'App\\Filament\\Cashier\\Resources\\ProductcategoryResource\\Pages\\CreateProductcategory' => __DIR__ . '/../..' . '/app/Filament/Cashier/Resources/ProductcategoryResource/Pages/CreateProductcategory.php',
+        'App\\Filament\\Cashier\\Resources\\ProductcategoryResource\\Pages\\EditProductcategory' => __DIR__ . '/../..' . '/app/Filament/Cashier/Resources/ProductcategoryResource/Pages/EditProductcategory.php',
+        'App\\Filament\\Cashier\\Resources\\ProductcategoryResource\\Pages\\ListProductcategories' => __DIR__ . '/../..' . '/app/Filament/Cashier/Resources/ProductcategoryResource/Pages/ListProductcategories.php',
+        'App\\Filament\\Cashier\\Resources\\ProductunitResource' => __DIR__ . '/../..' . '/app/Filament/Cashier/Resources/ProductunitResource.php',
+        'App\\Filament\\Cashier\\Resources\\ProductunitResource\\Pages\\CreateProductunit' => __DIR__ . '/../..' . '/app/Filament/Cashier/Resources/ProductunitResource/Pages/CreateProductunit.php',
+        'App\\Filament\\Cashier\\Resources\\ProductunitResource\\Pages\\EditProductunit' => __DIR__ . '/../..' . '/app/Filament/Cashier/Resources/ProductunitResource/Pages/EditProductunit.php',
+        'App\\Filament\\Cashier\\Resources\\ProductunitResource\\Pages\\ListProductunits' => __DIR__ . '/../..' . '/app/Filament/Cashier/Resources/ProductunitResource/Pages/ListProductunits.php',
+        'App\\Filament\\Cashier\\Resources\\PurchaseResource' => __DIR__ . '/../..' . '/app/Filament/Cashier/Resources/PurchaseResource.php',
+        'App\\Filament\\Cashier\\Resources\\PurchaseResource\\Pages\\CreatePurchase' => __DIR__ . '/../..' . '/app/Filament/Cashier/Resources/PurchaseResource/Pages/CreatePurchase.php',
+        'App\\Filament\\Cashier\\Resources\\PurchaseResource\\Pages\\EditPurchase' => __DIR__ . '/../..' . '/app/Filament/Cashier/Resources/PurchaseResource/Pages/EditPurchase.php',
+        'App\\Filament\\Cashier\\Resources\\PurchaseResource\\Pages\\ListPurchases' => __DIR__ . '/../..' . '/app/Filament/Cashier/Resources/PurchaseResource/Pages/ListPurchases.php',
         'App\\Filament\\Cashier\\Resources\\SalesResource' => __DIR__ . '/../..' . '/app/Filament/Cashier/Resources/SalesResource.php',
         'App\\Filament\\Cashier\\Resources\\SalesResource\\Pages\\CreateSales' => __DIR__ . '/../..' . '/app/Filament/Cashier/Resources/SalesResource/Pages/CreateSales.php',
         'App\\Filament\\Cashier\\Resources\\SalesResource\\Pages\\EditSales' => __DIR__ . '/../..' . '/app/Filament/Cashier/Resources/SalesResource/Pages/EditSales.php',
         'App\\Filament\\Cashier\\Resources\\SalesResource\\Pages\\ListSales' => __DIR__ . '/../..' . '/app/Filament/Cashier/Resources/SalesResource/Pages/ListSales.php',
+        'App\\Filament\\Cashier\\Resources\\SalesResource\\Pages\\PaymentAccountReport' => __DIR__ . '/../..' . '/app/Filament/Cashier/Resources/SalesResource/Pages/PaymentAccountReport.php',
+        'App\\Filament\\Cashier\\Resources\\SalesResource\\Pages\\Saledelivery' => __DIR__ . '/../..' . '/app/Filament/Cashier/Resources/SalesResource/Pages/Saledelivery.php',
+        'App\\Filament\\Cashier\\Resources\\StockCountResource' => __DIR__ . '/../..' . '/app/Filament/Cashier/Resources/StockCountResource.php',
+        'App\\Filament\\Cashier\\Resources\\StockCountResource\\Pages\\CreateStockCount' => __DIR__ . '/../..' . '/app/Filament/Cashier/Resources/StockCountResource/Pages/CreateStockCount.php',
+        'App\\Filament\\Cashier\\Resources\\StockCountResource\\Pages\\EditStockCount' => __DIR__ . '/../..' . '/app/Filament/Cashier/Resources/StockCountResource/Pages/EditStockCount.php',
+        'App\\Filament\\Cashier\\Resources\\StockCountResource\\Pages\\ListStockCounts' => __DIR__ . '/../..' . '/app/Filament/Cashier/Resources/StockCountResource/Pages/ListStockCounts.php',
+        'App\\Filament\\Cashier\\Resources\\VariationResource' => __DIR__ . '/../..' . '/app/Filament/Cashier/Resources/VariationResource.php',
+        'App\\Filament\\Cashier\\Resources\\VariationResource\\Pages\\CreateVariation' => __DIR__ . '/../..' . '/app/Filament/Cashier/Resources/VariationResource/Pages/CreateVariation.php',
+        'App\\Filament\\Cashier\\Resources\\VariationResource\\Pages\\EditVariation' => __DIR__ . '/../..' . '/app/Filament/Cashier/Resources/VariationResource/Pages/EditVariation.php',
+        'App\\Filament\\Cashier\\Resources\\VariationResource\\Pages\\ListVariations' => __DIR__ . '/../..' . '/app/Filament/Cashier/Resources/VariationResource/Pages/ListVariations.php',
         'App\\Filament\\Cashier\\Widgets\\CashierStatistics' => __DIR__ . '/../..' . '/app/Filament/Cashier/Widgets/CashierStatistics.php',
         'App\\Filament\\Cashier\\Widgets\\Cashier\\RecentTransactions' => __DIR__ . '/../..' . '/app/Filament/Cashier/Widgets/Cashier/RecentTransactions.php',
         'App\\Filament\\Clusters\\ProductsCluster' => __DIR__ . '/../..' . '/app/Filament/Clusters/ProductsCluster.php',
@@ -1086,6 +1140,7 @@ class ComposerStaticInit9c491b8531eec05ba41a11d9276a5749
         'App\\Providers\\SalesPosProvider' => __DIR__ . '/../..' . '/app/Providers/SalesPosProvider.php',
         'App\\Services\\SalesForm' => __DIR__ . '/../..' . '/app/Services/SalesForm.php',
         'App\\Services\\Saleservice' => __DIR__ . '/../..' . '/app/Services/Saleservice.php',
+        'App\\Support\\ProductSearchImage' => __DIR__ . '/../..' . '/app/Support/ProductSearchImage.php',
         'Attribute' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
         'Barryvdh\\Debugbar\\Console\\ClearCommand' => __DIR__ . '/..' . '/barryvdh/laravel-debugbar/src/Console/ClearCommand.php',
         'Barryvdh\\Debugbar\\Controllers\\AssetController' => __DIR__ . '/..' . '/barryvdh/laravel-debugbar/src/Controllers/AssetController.php',
@@ -5651,6 +5706,20 @@ class ComposerStaticInit9c491b8531eec05ba41a11d9276a5749
         'Masterminds\\HTML5\\Serializer\\OutputRules' => __DIR__ . '/..' . '/masterminds/html5/src/HTML5/Serializer/OutputRules.php',
         'Masterminds\\HTML5\\Serializer\\RulesInterface' => __DIR__ . '/..' . '/masterminds/html5/src/HTML5/Serializer/RulesInterface.php',
         'Masterminds\\HTML5\\Serializer\\Traverser' => __DIR__ . '/..' . '/masterminds/html5/src/HTML5/Serializer/Traverser.php',
+        'Milon\\Barcode\\BarcodeServiceProvider' => __DIR__ . '/..' . '/milon/barcode/src/Milon/Barcode/BarcodeServiceProvider.php',
+        'Milon\\Barcode\\DNS1D' => __DIR__ . '/..' . '/milon/barcode/src/Milon/Barcode/DNS1D.php',
+        'Milon\\Barcode\\DNS2D' => __DIR__ . '/..' . '/milon/barcode/src/Milon/Barcode/DNS2D.php',
+        'Milon\\Barcode\\Datamatrix' => __DIR__ . '/..' . '/milon/barcode/src/Milon/Barcode/Datamatrix.php',
+        'Milon\\Barcode\\Facades\\DNS1DFacade' => __DIR__ . '/..' . '/milon/barcode/src/Milon/Barcode/Facades/DNS1DFacade.php',
+        'Milon\\Barcode\\Facades\\DNS2DFacade' => __DIR__ . '/..' . '/milon/barcode/src/Milon/Barcode/Facades/DNS2DFacade.php',
+        'Milon\\Barcode\\GS1_128\\AIData' => __DIR__ . '/..' . '/milon/barcode/src/Milon/Barcode/GS1_128/AIData.php',
+        'Milon\\Barcode\\GS1_128\\GS1128' => __DIR__ . '/..' . '/milon/barcode/src/Milon/Barcode/GS1_128/GS1128.php',
+        'Milon\\Barcode\\GS1_128\\Section' => __DIR__ . '/..' . '/milon/barcode/src/Milon/Barcode/GS1_128/Section.php',
+        'Milon\\Barcode\\GS1_128\\SectionSlicer' => __DIR__ . '/..' . '/milon/barcode/src/Milon/Barcode/GS1_128/SectionSlicer.php',
+        'Milon\\Barcode\\GS1_128\\Subsets' => __DIR__ . '/..' . '/milon/barcode/src/Milon/Barcode/GS1_128/Subsets.php',
+        'Milon\\Barcode\\PDF417' => __DIR__ . '/..' . '/milon/barcode/src/Milon/Barcode/PDF417.php',
+        'Milon\\Barcode\\QRcode' => __DIR__ . '/..' . '/milon/barcode/src/Milon/Barcode/QRcode.php',
+        'Milon\\Barcode\\WrongCheckDigitException' => __DIR__ . '/..' . '/milon/barcode/src/Milon/Barcode/WrongCheckDigitException.php',
         'Mockery\\Adapter\\Phpunit\\MockeryPHPUnitIntegration' => __DIR__ . '/..' . '/mockery/mockery/library/Mockery/Adapter/Phpunit/MockeryPHPUnitIntegration.php',
         'Mockery\\Adapter\\Phpunit\\MockeryPHPUnitIntegrationAssertPostConditions' => __DIR__ . '/..' . '/mockery/mockery/library/Mockery/Adapter/Phpunit/MockeryPHPUnitIntegrationAssertPostConditions.php',
         'Mockery\\Adapter\\Phpunit\\MockeryTestCase' => __DIR__ . '/..' . '/mockery/mockery/library/Mockery/Adapter/Phpunit/MockeryTestCase.php',
@@ -9447,6 +9516,7 @@ class ComposerStaticInit9c491b8531eec05ba41a11d9276a5749
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInit9c491b8531eec05ba41a11d9276a5749::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInit9c491b8531eec05ba41a11d9276a5749::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInit9c491b8531eec05ba41a11d9276a5749::$prefixesPsr0;
             $loader->classMap = ComposerStaticInit9c491b8531eec05ba41a11d9276a5749::$classMap;
 
         }, null, ClassLoader::class);

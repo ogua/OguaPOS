@@ -28,6 +28,11 @@ class CashregisterResource extends Resource
 
     protected static ?string $slug = 'cash-register';
 
+    public static function canCreate(): bool
+    {
+        return false;
+    }
+
 
     // public static function getBreadcrumb(): string
     // {

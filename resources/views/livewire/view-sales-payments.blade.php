@@ -1,3 +1,7 @@
+@php
+    use Filament\Facades\Filament;
+@endphp
+
 <div>
     
     <x-filament::section
@@ -85,9 +89,17 @@
                         {{ $payment->paying_method }} 
                     </x-filament-tables::cell>
 
-                    @php
+                    
+                        
+                    @if (Filament::getCurrentPanel()->getId() === 'admin')
+                        @php
                         $url = App\Filament\Resources\PaymentResource::getUrl('edit',['record' => $payment]);
-                    @endphp
+                        @endphp
+                        @else
+                        @php
+                        $url = App\Filament\Cashier\Resources\PaymentResource::getUrl('edit',['record' => $payment]);
+                        @endphp
+                    @endif
 
                     <x-filament-tables::cell>
                         <div class="flex gap-x-4">
@@ -96,9 +108,14 @@
                                 Edit
                             </x-filament::button>
 
+                            @if (Filament::getCurrentPanel()->getId() === 'admin')
+
                             <x-filament::button wire:confirm="Are you sure you want to delete this payment?" wire:click="deletepayment('{{ $payment->id }}')" color="danger">
                                 Delete
                             </x-filament::button>
+
+                            @endif
+                            
                         </div>
                     </x-filament-tables::cell>
                 </x-filament-tables::row>

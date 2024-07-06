@@ -74,6 +74,9 @@ class ProductcategoryResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('name')
                     ->searchable(),
+                // Tables\Columns\TextColumn::make('total')
+                //     ->state(fn ($record) => $record->products->inventory->sum('qty')),
+                
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
