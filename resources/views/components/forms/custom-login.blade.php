@@ -8,7 +8,7 @@
     @endif
 
     <div class="text-center font-bold">
-        <a href="/cashier">Cashier Login</a>
+        <a href="/cashier">Login as cashier</a>
     </div>
 
     {{ \Filament\Support\Facades\FilamentView::renderHook(\Filament\View\PanelsRenderHook::AUTH_LOGIN_FORM_BEFORE, scopes: $this->getRenderHookScopes()) }}

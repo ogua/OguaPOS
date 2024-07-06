@@ -9,6 +9,7 @@ use Filament\Pages\Auth\Login;
 use Filament\Forms\Components\TextInput;
 use Filament\Actions\Action;
 use Filament\Actions\ActionGroup;
+use Illuminate\Contracts\Support\Htmlable;
 
 class CashierLogin extends Login
 {
@@ -33,7 +34,7 @@ class CashierLogin extends Login
     protected function getEmailFormComponent(): Component
     {
         return TextInput::make('email')
-            ->label('Email address | Username')
+            ->label('Email address / Username')
             ->required()
             ->autocomplete()
             ->autofocus()
@@ -58,4 +59,18 @@ class CashierLogin extends Login
             ->color('info')
             ->url('/admin');
     }
+
+    public function getTitle(): string | Htmlable
+    {
+        return __('filament-panels::pages/auth/login.title');
+    }
+
+    public function getHeading(): string | Htmlable
+    {
+        return __('Cashier Login');
+    }
+
+
+
+
 }

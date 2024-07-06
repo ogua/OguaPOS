@@ -99,7 +99,7 @@ class CashierStatistics extends BaseWidget
             ->description('Total Revenue')
             ->descriptionIcon('heroicon-m-chart-bar-square')
             ->color('success'),
-            Stat::make('Cash at hand', "GHC ".number_format($cashreg->cash_in_hand,2))
+            Stat::make('Cash at hand', "GHC ".number_format($cashreg->cash_in_hand ?? 0,2))
                 ->description('Cash At Hand')
                 ->descriptionIcon('heroicon-m-arrow-uturn-left')
                 ->color('info'),
