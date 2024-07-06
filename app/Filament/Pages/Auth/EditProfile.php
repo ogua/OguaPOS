@@ -19,7 +19,7 @@ class EditProfile extends BaseEditProfile
                     ->image(),
                 $this->getNameFormComponent(),
                 $this->getEmailFormComponent(),
-                $this->getRoleFormComponent(),
+                //$this->getRoleFormComponent(),
                 Forms\Components\TextInput::make('phone')
                     ->required()
                     ->tel(),
