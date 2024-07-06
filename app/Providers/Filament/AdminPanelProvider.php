@@ -4,6 +4,7 @@ namespace App\Providers\Filament;
 
 use App\Filament\Pages\Dashboard;
 use App\Filament\Pages\Auth\EditProfile;
+use App\Filament\Pages\Auth\Login;
 use App\Filament\Pages\Tenancy\RegisterWarehouse;
 use App\Filament\Resources\SalesResource;
 use App\Models\Warehouse;
@@ -34,14 +35,14 @@ class AdminPanelProvider extends PanelProvider
         ->id('admin')
         ->path('admin')
         ->profile(EditProfile::class)
-        ->login()
+        ->login(Login::class)
         ->navigation(request()->routeIs('filament.admin.resources.sales.pos.create') ? false : true)
         ->passwordReset()
         ->unsavedChangesAlerts()
         ->sidebarCollapsibleOnDesktop()
         ->brandLogo(asset('images/logo.png'))
-        ->brandLogoHeight(300)
-        ->brandLogoHeight('3rem')
+        //->brandLogoHeight(300)
+        ->brandLogoHeight('4rem')
         ->favicon(asset('images/logo.png'))
         ->navigationGroups([
             'Products',
