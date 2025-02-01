@@ -69,7 +69,7 @@
                 content: ''; display: block;
                 page-break-after: always;
                 page-break-inside: avoid;
-                page-break-before: avoid;        
+                page-break-before: avoid;
             }
         }
     </style>
@@ -90,15 +90,15 @@
         </table>
         <br>
     </div>
-        
+
     <div id="receipt-data">
         <div class="centered">
             @if($pos->company?->logo)
                 <img src="{{ asset('storage') }}/{{ $pos->company?->logo }}" height="42" width="50" style="margin:10px 0;filter: brightness(0);">
             @endif
-            
+
             <h2>{{ $pos->company?->name ?? ""}}</h2>
-            
+
             <p>Address: {{$pos->company?->address}}
                 <br>Phone Number: {{$pos->company?->phone}}
             </p>
@@ -113,7 +113,7 @@
                     $total_product_tax = 0;
                 ?>
                 @foreach(collect($sale->saleitem) as $key => $product_sale_data)
-                <?php 
+                <?php
                     $lims_product_data = \App\Models\Product::find($product_sale_data->product_id);
 
                     if($product_sale_data->variant_id) {
@@ -135,13 +135,13 @@
                         @foreach ($lims_product_data->taxes as $tax)
                             <?php $total_product_tax += $tax->rate ?>
                             Tax ({{$tax->rate}}%): {{$tax->name}}]
-                        @endforeach                        
-                
+                        @endforeach
+
                     </td>
                     <td style="text-align:right;vertical-align:bottom">{{number_format((float)$product_sale_data->total, 2, '.', '')}}</td>
                 </tr>
                 @endforeach
-            
+
             <!-- <tfoot> -->
                 <tr>
                     <th colspan="2" style="text-align:left">Total</th>
@@ -163,7 +163,7 @@
                     <td style="text-align:right">{{number_format((float)($total_product_tax / 2), 2, '.', '')}}</td>
                 </tr>
                 @endif
-                
+
                 @if($sale->order_tax > 0)
                 <tr>
                     <th colspan="2" style="text-align:left">Order Tax</th>
@@ -206,14 +206,13 @@
                     <td style="padding: 5px;width:30%">Paid By: {{$payment_data->paying_method}}</td>
                     <td style="padding: 5px;width:40%">Amount: {{number_format((float)$payment_data->amount, 2, '.', '')}}</td>
                     <td style="padding: 5px;width:30%">Change: {{number_format((float)$payment_data->change, 2, '.', '')}}</td>
-                </tr>                
+                </tr>
                 @endforeach
                 <tr><td class="centered" colspan="3">Thank You For Shopping With Us. Please Come Again</td></tr>
                 <tr>
                     <td class="centered" colspan="3">
                     <?php echo '<img style="margin-top:10px;" src="data:image/png;base64,' .DNS1D::getBarcodePNG($sale->reference_number, 'C128') . '" width="300" alt="barcode"   />';?>
-                    <br>
-                    <?php echo '<img style="margin-top:10px;" src="data:image/png;base64,' .DNS2D::getBarcodePNG($sale->reference_number, 'QRCODE') . '" alt="barcode"   />';?>    
+                   <!--- //echo //'<img style="margin-top:10px;" src="data:image/png;base64,' .DNS2D::getBarcodePNG($sale->reference_number, 'QRCODE') . '" alt="barcode"   />';--->
                     </td>
                 </tr>
             </tbody>
@@ -227,7 +226,7 @@
 
 <script type="text/javascript">
     localStorage.clear();
-    function auto_print() {     
+    function auto_print() {
         window.print()
     }
     setTimeout(auto_print, 1000);

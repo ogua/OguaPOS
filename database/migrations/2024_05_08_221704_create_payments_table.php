@@ -38,7 +38,7 @@ return new class extends Migration
             $table->string('paying_method')->nullable();
             $table->text('payment_note')->nullable();
             $table->string('bankname')->nullable();
-            $table->decimal('paid_on',10,2)->nullable();
+            $table->dateTime('paid_on',10,2)->nullable();
             $table->string('accountnumber')->nullable();
             $table->timestamps();
         });
