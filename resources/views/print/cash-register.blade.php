@@ -37,14 +37,14 @@
             color: #FFF;
             width: 100%;
         }
-    
+
         small{font-size:11px;}
     </style>
 <body>
 
 <div class="card col-md-8 col-md-offset-2">
 	<div class="card-body">
-		<div class="card-body table-responsive p-0">
+		<div class="p-0 card-body table-responsive">
             <table class="table" style="border: none !important;">
 
                 @php
@@ -61,7 +61,7 @@
                         <th style="font-size: 13px;">Sales</th>
                         <th style="font-size: 13px;">Expenses</th>
 					</tr>
-                   
+
                     <tr>
 						<th style="font-size: 13px;">Cash in hand:</th>
                         <th style="font-size: 13px;">
@@ -76,12 +76,12 @@
                      <tr>
 						<th style="font-size: 13px;">Cash payment:</th>
                         <th style="font-size: 13px;">
-                            @if (isset($record->salesSummary['CASH']))
+                            @if (isset($salesSummaryArray['CASH']))
                                 @php
-                                    $total += $record->salesSummary['CASH'];
-                                    $totalsale += $record->salesSummary['CASH'];
+                                    $total += $salesSummaryArray['CASH'];
+                                    $totalsale += $salesSummaryArray['CASH'];
                                 @endphp
-                                    GHC {{ number_format($record->salesSummary['CASH'],2) }}</p>
+                                    GHC {{ number_format($salesSummaryArray['CASH'],2) }}</p>
                                 @else
                                     GHC {{ number_format(0,2) }}
                             @endif
@@ -92,12 +92,12 @@
                     <tr>
 						<th style="font-size: 13px;">Cheque payment:</th>
                         <th style="font-size: 13px;">
-                            @if (isset($record->salesSummary['CHEQUE']))
+                            @if (isset($salesSummaryArray['CHEQUE']))
                                 @php
-                                    $total += $record->salesSummary['CHEQUE'];
-                                    $totalsale += $record->salesSummary['CHEQUE'];
+                                    $total += $salesSummaryArray['CHEQUE'];
+                                    $totalsale += $salesSummaryArray['CHEQUE'];
                                 @endphp
-                                    GHC {{ number_format($record->salesSummary['CHEQUE'],2) }}</p>
+                                    GHC {{ number_format($salesSummaryArray['CHEQUE'],2) }}</p>
                                 @else
                                     GHC {{ number_format(0,2) }}
                             @endif
@@ -108,12 +108,12 @@
                     <tr>
 						<th style="font-size: 13px;">Paypal payment:</th>
                         <th style="font-size: 13px;">
-                            @if (isset($record->salesSummary['PAYPAL']))
+                            @if (isset($salesSummaryArray['PAYPAL']))
                                 @php
-                                    $total += $record->salesSummary['PAYPAL'];
-                                    $totalsale += $record->salesSummary['PAYPAL'];
+                                    $total += $salesSummaryArray['PAYPAL'];
+                                    $totalsale += $salesSummaryArray['PAYPAL'];
                                 @endphp
-                                    GHC {{ number_format($record->salesSummary['PAYPAL'],2) }}</p>
+                                    GHC {{ number_format($salesSummaryArray['PAYPAL'],2) }}</p>
                                 @else
                                     GHC {{ number_format(0,2) }}
                             @endif
@@ -125,12 +125,12 @@
                     <tr>
 						<th style="font-size: 13px;">Gift card payment:</th>
                         <th style="font-size: 13px;">
-                            @if (isset($record->salesSummary['GIFT CARD']))
+                            @if (isset($salesSummaryArray['GIFT CARD']))
                                 @php
-                                    $total += $record->salesSummary['GIFT CARD'];
-                                    $totalsale += $record->salesSummary['GIFT CARD'];
+                                    $total += $salesSummaryArray['GIFT CARD'];
+                                    $totalsale += $salesSummaryArray['GIFT CARD'];
                                 @endphp
-                                    GHC {{ number_format($record->salesSummary['GIFT CARD'],2) }}</p>
+                                    GHC {{ number_format($salesSummaryArray['GIFT CARD'],2) }}</p>
                                 @else
                                     GHC {{ number_format(0,2) }}
                             @endif
@@ -142,12 +142,12 @@
                     <tr>
 						<th style="font-size: 13px;">Credit card  payment:</th>
                         <th style="font-size: 13px;">
-                            @if (isset($record->salesSummary['CREDIT CARD']))
+                            @if (isset($salesSummaryArray['CREDIT CARD']))
                                 @php
-                                    $total += $record->salesSummary['CREDIT CARD'];
-                                    $totalsale += $record->salesSummary['CREDIT CARD'];
+                                    $total += $salesSummaryArray['CREDIT CARD'];
+                                    $totalsale += $salesSummaryArray['CREDIT CARD'];
                                 @endphp
-                                    GHC {{ number_format($record->salesSummary['CREDIT CARD'],2) }}</p>
+                                    GHC {{ number_format($salesSummaryArray['CREDIT CARD'],2) }}</p>
                                 @else
                                     GHC {{ number_format(0,2) }}
                             @endif
@@ -160,12 +160,12 @@
                     <tr>
 						<th style="font-size: 13px;">Bank transfer payment:</th>
                         <th style="font-size: 13px;">
-                            @if (isset($record->salesSummary['BANK TRANSFER']))
+                            @if (isset($salesSummaryArray['BANK TRANSFER']))
                                 @php
-                                    $total += $record->salesSummary['BANK TRANSFER'];
-                                    $totalsale += $record->salesSummary['BANK TRANSFER'];
+                                    $total += $salesSummaryArray['BANK TRANSFER'];
+                                    $totalsale += $salesSummaryArray['BANK TRANSFER'];
                                 @endphp
-                                    GHC {{ number_format($record->salesSummary['BANK TRANSFER'],2) }}</p>
+                                    GHC {{ number_format($salesSummaryArray['BANK TRANSFER'],2) }}</p>
                                 @else
                                     GHC {{ number_format(0,2) }}
                             @endif
@@ -198,7 +198,7 @@
 
             <br><br>
 
-            
+
 			<table class="table table-table table-bordered">
 				<thead>
                     <tr class="bg-info">
@@ -217,7 +217,7 @@
                         $totpx = 0;
                     @endphp
 
-                        @foreach ($salesbrandSummary ?? [] as $brand => $totalQty)
+                        @foreach ($salesSummaryArrayAssoc ?? [] as $brand => $totalQty)
                             <tr>
                                 <td>{{ $brand }}</td>
                                 <td>
@@ -240,7 +240,7 @@
                         <tr class="hidden-print">
                             <td colspan="3" class="text-center"><button onclick="window.print();" class="btn btn-primary"><i class="dripicons-print"></i>Print</button></td>
                         </tr>
-                        
+
 				</tbody>
 			</table>
             <div class="text-center" style="margin:30px 0 50px;">
@@ -252,7 +252,7 @@
 
 <script type="text/javascript">
     localStorage.clear();
-    function auto_print() {     
+    function auto_print() {
        window.print()
     }
     setTimeout(auto_print, 1000);

@@ -37,10 +37,10 @@ class ComposerStaticInit9c491b8531eec05ba41a11d9276a5749
         '9720327d09ed9a4ba00c9b5071b71c7d' => __DIR__ . '/..' . '/danharrin/date-format-converter/src/standards.php',
         '2ad94ea6f6f6013119e9abcf4e302a08' => __DIR__ . '/..' . '/filament/forms/src/helpers.php',
         'b69d5f1f95cd1ed438c038b6cbcc45b5' => __DIR__ . '/..' . '/filament/notifications/src/Testing/Autoload.php',
-        '7b11c4dc42b3b3023073cb14e519683c' => __DIR__ . '/..' . '/ralouphie/getallheaders/src/getallheaders.php',
-        '3bd81c9b8fcc150b69d8b63b4d2ccf23' => __DIR__ . '/..' . '/spatie/flare-client-php/src/helpers.php',
         '89e9938b64b06cc502d7ceca69a380fe' => __DIR__ . '/..' . '/filament/filament/src/global_helpers.php',
         'ebb446bb6d02e998480945fbbb73dc64' => __DIR__ . '/..' . '/filament/filament/src/helpers.php',
+        '7b11c4dc42b3b3023073cb14e519683c' => __DIR__ . '/..' . '/ralouphie/getallheaders/src/getallheaders.php',
+        '3bd81c9b8fcc150b69d8b63b4d2ccf23' => __DIR__ . '/..' . '/spatie/flare-client-php/src/helpers.php',
         '6124b4c8570aa390c21fafd04a26c69f' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
         '801c31d8ed748cfa537fa45402288c95' => __DIR__ . '/..' . '/psy/psysh/src/functions.php',
         '4a1f389d6ce373bda9e57857d3b61c84' => __DIR__ . '/..' . '/barryvdh/laravel-debugbar/src/helpers.php',
@@ -99,6 +99,7 @@ class ComposerStaticInit9c491b8531eec05ba41a11d9276a5749
             'Symfony\\Component\\ErrorHandler\\' => 31,
             'Symfony\\Component\\CssSelector\\' => 30,
             'Symfony\\Component\\Console\\' => 26,
+            'Swis\\Filament\\Backgrounds\\' => 26,
             'Svg\\' => 4,
             'Spatie\\LaravelPackageTools\\' => 27,
             'Spatie\\LaravelIgnition\\' => 23,
@@ -384,6 +385,10 @@ class ComposerStaticInit9c491b8531eec05ba41a11d9276a5749
         array (
             0 => __DIR__ . '/..' . '/symfony/console',
         ),
+        'Swis\\Filament\\Backgrounds\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/swisnl/filament-backgrounds/src',
+        ),
         'Svg\\' => 
         array (
             0 => __DIR__ . '/..' . '/phenx/php-svg-lib/src/Svg',
@@ -394,8 +399,8 @@ class ComposerStaticInit9c491b8531eec05ba41a11d9276a5749
         ),
         'Spatie\\LaravelIgnition\\' => 
         array (
-            0 => __DIR__ . '/..' . '/spatie/error-solutions/legacy/laravel-ignition',
-            1 => __DIR__ . '/..' . '/spatie/laravel-ignition/src',
+            0 => __DIR__ . '/..' . '/spatie/laravel-ignition/src',
+            1 => __DIR__ . '/..' . '/spatie/error-solutions/legacy/laravel-ignition',
         ),
         'Spatie\\Invade\\' => 
         array (
@@ -403,8 +408,8 @@ class ComposerStaticInit9c491b8531eec05ba41a11d9276a5749
         ),
         'Spatie\\Ignition\\' => 
         array (
-            0 => __DIR__ . '/..' . '/spatie/error-solutions/legacy/ignition',
-            1 => __DIR__ . '/..' . '/spatie/ignition/src',
+            0 => __DIR__ . '/..' . '/spatie/ignition/src',
+            1 => __DIR__ . '/..' . '/spatie/error-solutions/legacy/ignition',
         ),
         'Spatie\\FlareClient\\' => 
         array (
@@ -816,6 +821,12 @@ class ComposerStaticInit9c491b8531eec05ba41a11d9276a5749
         'App\\Filament\\Cashier\\Resources\\InvoiceResource\\Pages\\EditInvoice' => __DIR__ . '/../..' . '/app/Filament/Cashier/Resources/InvoiceResource/Pages/EditInvoice.php',
         'App\\Filament\\Cashier\\Resources\\InvoiceResource\\Pages\\ListInvoices' => __DIR__ . '/../..' . '/app/Filament/Cashier/Resources/InvoiceResource/Pages/ListInvoices.php',
         'App\\Filament\\Cashier\\Resources\\InvoiceResource\\Pages\\ViewInvoice' => __DIR__ . '/../..' . '/app/Filament/Cashier/Resources/InvoiceResource/Pages/ViewInvoice.php',
+        'App\\Filament\\Cashier\\Resources\\PaymentResource' => __DIR__ . '/../..' . '/app/Filament/Cashier/Resources/PaymentResource.php',
+        'App\\Filament\\Cashier\\Resources\\PaymentResource\\Pages\\Accountbook' => __DIR__ . '/../..' . '/app/Filament/Cashier/Resources/PaymentResource/Pages/Accountbook.php',
+        'App\\Filament\\Cashier\\Resources\\PaymentResource\\Pages\\CreatePayment' => __DIR__ . '/../..' . '/app/Filament/Cashier/Resources/PaymentResource/Pages/CreatePayment.php',
+        'App\\Filament\\Cashier\\Resources\\PaymentResource\\Pages\\EditPayment' => __DIR__ . '/../..' . '/app/Filament/Cashier/Resources/PaymentResource/Pages/EditPayment.php',
+        'App\\Filament\\Cashier\\Resources\\PaymentResource\\Pages\\ListPayments' => __DIR__ . '/../..' . '/app/Filament/Cashier/Resources/PaymentResource/Pages/ListPayments.php',
+        'App\\Filament\\Cashier\\Resources\\PaymentResource\\Pages\\PaymentAccountBook' => __DIR__ . '/../..' . '/app/Filament/Cashier/Resources/PaymentResource/Pages/PaymentAccountBook.php',
         'App\\Filament\\Cashier\\Resources\\ProductResource' => __DIR__ . '/../..' . '/app/Filament/Cashier/Resources/ProductResource.php',
         'App\\Filament\\Cashier\\Resources\\ProductResource\\Pages\\CreateProduct' => __DIR__ . '/../..' . '/app/Filament/Cashier/Resources/ProductResource/Pages/CreateProduct.php',
         'App\\Filament\\Cashier\\Resources\\ProductResource\\Pages\\EditProduct' => __DIR__ . '/../..' . '/app/Filament/Cashier/Resources/ProductResource/Pages/EditProduct.php',
@@ -856,6 +867,7 @@ class ComposerStaticInit9c491b8531eec05ba41a11d9276a5749
         'App\\Filament\\CustomForm\\Autocomplete' => __DIR__ . '/../..' . '/app/Filament/CustomForm/Autocomplete.php',
         'App\\Filament\\Pages\\Auth\\CashierLogin' => __DIR__ . '/../..' . '/app/Filament/Pages/Auth/CashierLogin.php',
         'App\\Filament\\Pages\\Auth\\EditProfile' => __DIR__ . '/../..' . '/app/Filament/Pages/Auth/EditProfile.php',
+        'App\\Filament\\Pages\\Auth\\Login' => __DIR__ . '/../..' . '/app/Filament/Pages/Auth/Login.php',
         'App\\Filament\\Pages\\BalanceSheet' => __DIR__ . '/../..' . '/app/Filament/Pages/BalanceSheet.php',
         'App\\Filament\\Pages\\CashFlow' => __DIR__ . '/../..' . '/app/Filament/Pages/CashFlow.php',
         'App\\Filament\\Pages\\Dashboard' => __DIR__ . '/../..' . '/app/Filament/Pages/Dashboard.php',
@@ -8454,6 +8466,13 @@ class ComposerStaticInit9c491b8531eec05ba41a11d9276a5749
         'Svg\\Tag\\Symbol' => __DIR__ . '/..' . '/phenx/php-svg-lib/src/Svg/Tag/Symbol.php',
         'Svg\\Tag\\Text' => __DIR__ . '/..' . '/phenx/php-svg-lib/src/Svg/Tag/Text.php',
         'Svg\\Tag\\UseTag' => __DIR__ . '/..' . '/phenx/php-svg-lib/src/Svg/Tag/UseTag.php',
+        'Swis\\Filament\\Backgrounds\\Contracts\\ProvidesImages' => __DIR__ . '/..' . '/swisnl/filament-backgrounds/src/Contracts/ProvidesImages.php',
+        'Swis\\Filament\\Backgrounds\\FilamentBackgroundsPlugin' => __DIR__ . '/..' . '/swisnl/filament-backgrounds/src/FilamentBackgroundsPlugin.php',
+        'Swis\\Filament\\Backgrounds\\FilamentBackgroundsServiceProvider' => __DIR__ . '/..' . '/swisnl/filament-backgrounds/src/FilamentBackgroundsServiceProvider.php',
+        'Swis\\Filament\\Backgrounds\\Image' => __DIR__ . '/..' . '/swisnl/filament-backgrounds/src/Image.php',
+        'Swis\\Filament\\Backgrounds\\ImageProviders\\CuratedBySwis' => __DIR__ . '/..' . '/swisnl/filament-backgrounds/src/ImageProviders/CuratedBySwis.php',
+        'Swis\\Filament\\Backgrounds\\ImageProviders\\MyImages' => __DIR__ . '/..' . '/swisnl/filament-backgrounds/src/ImageProviders/MyImages.php',
+        'Swis\\Filament\\Backgrounds\\ImageProviders\\Triangles' => __DIR__ . '/..' . '/swisnl/filament-backgrounds/src/ImageProviders/Triangles.php',
         'Symfony\\Component\\Console\\Application' => __DIR__ . '/..' . '/symfony/console/Application.php',
         'Symfony\\Component\\Console\\Attribute\\AsCommand' => __DIR__ . '/..' . '/symfony/console/Attribute/AsCommand.php',
         'Symfony\\Component\\Console\\CI\\GithubActionReporter' => __DIR__ . '/..' . '/symfony/console/CI/GithubActionReporter.php',

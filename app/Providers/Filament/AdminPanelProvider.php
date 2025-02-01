@@ -2,29 +2,31 @@
 
 namespace App\Providers\Filament;
 
-use App\Filament\Pages\Dashboard;
-use App\Filament\Pages\Auth\EditProfile;
-use App\Filament\Pages\Auth\Login;
-use App\Filament\Pages\Tenancy\RegisterWarehouse;
-use App\Filament\Resources\SalesResource;
-use App\Models\Warehouse;
-use Filament\Http\Middleware\Authenticate;
-use Filament\Http\Middleware\DisableBladeIconComponents;
-use Filament\Http\Middleware\DispatchServingFilamentEvent;
-use Filament\Navigation\NavigationItem;
 use Filament\Pages;
 use Filament\Panel;
-use Filament\PanelProvider;
-use Filament\Support\Colors\Color;
 use Filament\Widgets;
-use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
+use App\Models\Warehouse;
+use Filament\PanelProvider;
+use App\Filament\Pages\Dashboard;
+use App\Filament\Pages\Auth\Login;
+use Filament\Support\Colors\Color;
+use Filament\Navigation\NavigationItem;
+use App\Filament\Pages\Auth\EditProfile;
+use App\Filament\Resources\SalesResource;
+use Filament\Http\Middleware\Authenticate;
+use Illuminate\Session\Middleware\StartSession;
 use Illuminate\Cookie\Middleware\EncryptCookies;
-use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
+use App\Filament\Pages\Tenancy\RegisterWarehouse;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\AuthenticateSession;
-use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use Swis\Filament\Backgrounds\ImageProviders\MyImages;
+use Filament\Http\Middleware\DisableBladeIconComponents;
+use Swis\Filament\Backgrounds\FilamentBackgroundsPlugin;
+use Filament\Http\Middleware\DispatchServingFilamentEvent;
+use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Leandrocfe\FilamentApexCharts\FilamentApexChartsPlugin;
+use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -80,7 +82,12 @@ class AdminPanelProvider extends PanelProvider
                         // Widgets\FilamentInfoWidget::class,
                         ])
                         ->plugins([
-                            FilamentApexChartsPlugin::make()
+                            FilamentApexChartsPlugin::make(),
+                            FilamentBackgroundsPlugin::make()
+                                ->imageProvider(
+                                    MyImages::make()
+                                        ->directory('images/backgrounds')
+                                ),
                             ])
                             ->middleware([
                                 EncryptCookies::class,
@@ -98,4 +105,3 @@ class AdminPanelProvider extends PanelProvider
                                 ]);
                             }
                         }
-                        

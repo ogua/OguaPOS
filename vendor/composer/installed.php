@@ -3,7 +3,7 @@
         'name' => 'laravel/laravel',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '57a0c59d5b38e1dcf47d9d6ad343edf51e095ec0',
+        'reference' => '615729c4f4ee20262d07f1e1516de5e14cad4f9a',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -607,7 +607,7 @@
         'laravel/laravel' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '57a0c59d5b38e1dcf47d9d6ad343edf51e095ec0',
+            'reference' => '615729c4f4ee20262d07f1e1516de5e14cad4f9a',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -1099,8 +1099,8 @@
         'psr/log-implementation' => array(
             'dev_requirement' => false,
             'provided' => array(
-                0 => '3.0.0',
-                1 => '1.0|2.0|3.0',
+                0 => '1.0|2.0|3.0',
+                1 => '3.0.0',
             ),
         ),
         'psr/simple-cache' => array(
@@ -1382,6 +1382,15 @@
             'reference' => 'ddf678e78d7f8b17e5cdd99c0c3413a4a6592e53',
             'type' => 'library',
             'install_path' => __DIR__ . '/../spatie/laravel-package-tools',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'swisnl/filament-backgrounds' => array(
+            'pretty_version' => '1.1.4',
+            'version' => '1.1.4.0',
+            'reference' => '3025bf108ceffb21468f4ad42183014cc22133e6',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../swisnl/filament-backgrounds',
             'aliases' => array(),
             'dev_requirement' => false,
         ),

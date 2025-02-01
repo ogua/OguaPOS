@@ -26,13 +26,13 @@ class WebController extends Controller
 {
     public function downloadorder($id)
     {
-        $data = SalesOrder::where('ref',$id)->first();
-        return view('download.order',compact('data'));
+        $data = SalesOrder::where('ref', $id)->first();
+        return view('download.order', compact('data'));
     }
 
     public function printlabel(Request $request)
     {
-        
+
         $productname = $request->get('productname');
         $variation = $request->get('variation');
         $productPrice = $request->get('productPrice');
@@ -41,40 +41,54 @@ class WebController extends Controller
         $expirydate = $request->get('expirydate');
         $packingdate = $request->get('packingdate');
         $incTax = $request->get('incTax');
-     
+
         $products = json_decode($request->get('data'));
 
 
         //dd($request);
 
-        return view('label.label-print',compact('productname','variation','productPrice','exTax',
-        'businessname','expirydate','packingdate','incTax','products'));
+        return view('label.label-print', compact(
+            'productname',
+            'variation',
+            'productPrice',
+            'exTax',
+            'businessname',
+            'expirydate',
+            'packingdate',
+            'incTax',
+            'products'
+        ));
     }
 
 
     public function printcashregister(Cashregister $record)
-    {        
+    {
         $datefrom = date('Y-m-d', strtotime($record->created_at));
         $dateto = date('Y-m-d', strtotime($record->closed_at));
 
         $salesSummary = DB::table('sales')
-        ->whereBetween('sales.created_at',[$datefrom,$dateto])
-        ->join('payments', 'sales.id', '=', 'payments.sale_id')
-        ->where('sales.cash_register_id',$record->id)
-        ->select('payments.paying_method', DB::raw('SUM(payments.amount) as total_amount'))
-        ->groupBy('payments.paying_method')
-        ->get();
+            //->whereBetween('sales.transaction_date',[$datefrom,$dateto])
+            ->where('sales.transaction_date', '>=', $datefrom)
+            ->where('sales.transaction_date', '<=', $datefrom)
+            ->join('payments', 'sales.id', '=', 'payments.sale_id')
+            ->where('sales.cash_register_id', $record->id)
+            ->select('payments.paying_method', DB::raw('SUM(payments.amount) as total_amount'))
+            ->groupBy('payments.paying_method')
+            ->get();
 
         // Transform the results into an associative array
         $salesSummaryArray = $salesSummary->pluck('total_amount', 'paying_method')->toArray();
 
-        
+        // dd($salesSummaryArray);
+
         $salesbrandSummary = DB::table('sales')
-            ->whereBetween('sales.created_at',[$datefrom,$dateto])
+            //->whereBetween('sales.transaction_date',[$datefrom,$dateto])
+            ->where('sales.transaction_date', '>=', $datefrom)
+            ->where('sales.transaction_date', '<=', $datefrom)
             ->join('sales_items', 'sales.id', '=', 'sales_items.sale_id')
             ->join('products', 'sales_items.product_id', '=', 'products.id')
             ->leftJoin('brands', 'products.brand_id', '=', 'brands.id')
-            ->where('sales.cash_register_id',$record->id)
+            ->where('sales.cash_register_id', $record->id)
             ->select(
                 DB::raw('COALESCE(brands.name, "-") as brand_name'),
                 DB::raw('SUM(sales_items.qty) as total_qty'),
@@ -84,41 +98,41 @@ class WebController extends Controller
             ->get();
 
         // Convert to associative array for easier handling in the view
-        $salesSummaryArray = $salesbrandSummary->mapWithKeys(function ($item) {
-            return [$item->brand_name => $item->total_qty.','.$item->brand_total];
+        $salesSummaryArrayAssoc = $salesbrandSummary->mapWithKeys(function ($item) {
+            return [$item->brand_name => $item->total_qty . ',' . $item->brand_total];
         })->toArray();
 
-        $pos = Possettings::where('warehouse_id',$record->warehouse_id)->first();
+        $pos = Possettings::where('warehouse_id', $record->warehouse_id)->first();
 
-        return view('print.cash-register',compact('pos','record','datefrom','dateto','salesSummaryArray','salesSummaryArray'));
+        return view('print.cash-register', compact('pos', 'salesSummaryArrayAssoc', 'record', 'datefrom', 'dateto', 'salesSummaryArray', 'salesSummaryArray'));
     }
 
     public function check()
     {
-        $sale = SalesItems::select('product_name','product_id',DB::raw('sum(qty) as sold_qty'))
-                    ->whereDate('sales_items.created_at', '>=' , date("Y").'-01-01')
-                    ->whereDate('sales_items.created_at', '<=' , date("Y").'-12-31')
-                    ->groupBy('product_id','variant_id','product_name')
-                    ->orderBy('sold_qty', 'desc')
-                    ->take(5)
-                    ->get();
+        $sale = SalesItems::select('product_name', 'product_id', DB::raw('sum(qty) as sold_qty'))
+            ->whereDate('sales_items.created_at', '>=', date("Y") . '-01-01')
+            ->whereDate('sales_items.created_at', '<=', date("Y") . '-12-31')
+            ->groupBy('product_id', 'variant_id', 'product_name')
+            ->orderBy('sold_qty', 'desc')
+            ->take(5)
+            ->get();
 
         dd($sale);
     }
 
     public function downloaddelivery($id)
     {
-        $data = Delivery::where('ref',$id)->first();
-        return view('download.delivery',compact('data'));
+        $data = Delivery::where('ref', $id)->first();
+        return view('download.delivery', compact('data'));
     }
 
 
     public function invoice(Modelinvoice $record)
     {
-       // dd($record);
+        // dd($record);
 
-       $companyinfo = Companyinfo::first();
-        
+        $companyinfo = Companyinfo::first();
+
         $customer = new Buyer([
             'name'          => $record->client?->name,
             'phone'          => $record->client?->phone,
@@ -136,23 +150,23 @@ class WebController extends Controller
                 'other email' => $companyinfo?->other_email,
             ],
         ]);
-        
+
         $items = [];
 
         $dcnttype = $record->order_discount_type;
 
-        if($dcnttype == "Flat"){
-            $dsct = round(((int) $record->order_discount_value / (int) $record->total_price) * 100,2);
-        }else{
+        if ($dcnttype == "Flat") {
+            $dsct = round(((int) $record->order_discount_value / (int) $record->total_price) * 100, 2);
+        } else {
             $dsct = $record->order_discount_value ?? 0;
         }
 
         foreach ($record->orderitems as $item) {
-             $items[] = InvoiceItem::make($item->product_name)->pricePerUnit($item->unit_price)->quantity($item->qty)->discount($item->discount ?? 0)->tax($item->tax);
+            $items[] = InvoiceItem::make($item->product_name)->pricePerUnit($item->unit_price)->quantity($item->qty)->discount($item->discount ?? 0)->tax($item->tax);
         }
 
         $note = $record->terms;
-        
+
         $invoice = Invoice::make()
             ->series($record->reference)
             ->buyer($customer)
@@ -165,24 +179,24 @@ class WebController extends Controller
             ->taxableAmount($record->order_tax_value ?? 0)
             ->shipping($record->shipping_cost ?? 0)
             ->notes($note)
-            ->filename('Invoice-for-'.Str::slug($customer->name))
+            ->filename('Invoice-for-' . Str::slug($customer->name))
             //->logo(Storage::path($companyinfo->logo))
             ->addItems($items)
             ->save('public');
 
-            $link = $invoice->url();
-            // Then send email to party with link
-        
+        $link = $invoice->url();
+        // Then send email to party with link
+
         return $invoice->stream();
     }
 
 
     public function sendinvoice(Modelinvoice $record)
     {
-       // dd($record);
+        // dd($record);
 
-      $companyinfo = Companyinfo::first();
-        
+        $companyinfo = Companyinfo::first();
+
         $customer = new Buyer([
             'name'          => $record->client?->name,
             'phone'          => $record->client?->phone,
@@ -200,23 +214,23 @@ class WebController extends Controller
                 'other email' => $companyinfo?->other_email,
             ],
         ]);
-        
+
         $items = [];
 
         $dcnttype = $record->order_discount_type;
 
-        if($dcnttype == "Flat"){
-            $dsct = round(((int) $record->order_discount_value / (int) $record->total_price) * 100,2);
-        }else{
+        if ($dcnttype == "Flat") {
+            $dsct = round(((int) $record->order_discount_value / (int) $record->total_price) * 100, 2);
+        } else {
             $dsct = $record->order_discount_value ?? 0;
         }
 
         foreach ($record->orderitems as $item) {
-             $items[] = InvoiceItem::make($item->product_name)->pricePerUnit($item->unit_price)->quantity($item->qty)->discount($item->discount ?? 0)->tax($item->tax);
+            $items[] = InvoiceItem::make($item->product_name)->pricePerUnit($item->unit_price)->quantity($item->qty)->discount($item->discount ?? 0)->tax($item->tax);
         }
 
         $note = $record->terms;
-        
+
         $invoice = Invoice::make()
             ->series($record->reference)
             ->buyer($customer)
@@ -229,21 +243,21 @@ class WebController extends Controller
             ->taxableAmount($record->order_tax_rate ?? 0)
             ->shipping($record->shipping_cost ?? 0)
             ->notes($note)
-            ->filename('Invoice-for-'.Str::slug($customer->name))
+            ->filename('Invoice-for-' . Str::slug($customer->name))
             //->logo(Storage::path($companyinfo->logo))
             ->addItems($items)
             ->save('public');
 
-            $link = $invoice->url();
+        $link = $invoice->url();
 
-            $email = $record->client?->email;
-            
-            Mail::send('invoice',compact('link'), function($message) use($email) {
-                $message->to($email)
+        $email = $record->client?->email;
+
+        Mail::send('invoice', compact('link'), function ($message) use ($email) {
+            $message->to($email)
                 ->subject("Your Invoice");
-                $message->from('alert@salesdashboard.com');
-            });
-        
+            $message->from('alert@salesdashboard.com');
+        });
+
         return true;
     }
 
@@ -251,10 +265,10 @@ class WebController extends Controller
 
     public function delivery(Delivery $record)
     {
-       // dd($record);
+        // dd($record);
 
-       $companyinfo = Companyinfo::first();
-        
+        $companyinfo = Companyinfo::first();
+
         $customer = new Buyer([
             'name'          => $record->order?->customer?->name,
             'phone'          => $record->order?->customer?->phone_number,
@@ -272,7 +286,7 @@ class WebController extends Controller
                 'other email' => $companyinfo?->other_email,
             ],
         ]);
-        
+
         $items = [];
 
         foreach ($record->order?->saleitem as $item) {
@@ -281,12 +295,12 @@ class WebController extends Controller
 
         $dcnttype = $record->order?->order_discount_type;
 
-        if($dcnttype == "Flat"){
-            $dsct = round(((int) $record->order?->order_discount_value / (int) $record->order?->total_price) * 100,2);
-        }else{
+        if ($dcnttype == "Flat") {
+            $dsct = round(((int) $record->order?->order_discount_value / (int) $record->order?->total_price) * 100, 2);
+        } else {
             $dsct = $record->order?->order_discount_value ?? 0;
         }
-        
+
         $invoice = Invoice::make()
             ->series($record->order?->reference_number)
             ->buyer($customer)
@@ -298,21 +312,21 @@ class WebController extends Controller
             ->discountByPercent($dsct)
             //->taxRate($record->order?->order_tax_value ?? 0)
             ->shipping($record->order?->shipping_cost ?? 0)
-           // ->notes($note)
-            ->filename('delivery-'.Str::slug($record->order?->reference_number))
+            // ->notes($note)
+            ->filename('delivery-' . Str::slug($record->order?->reference_number))
             //->logo(Storage::path($companyinfo->logo))
             ->addItems($items);
-        
+
         return $invoice->stream();
     }
 
 
     public function order(SalesOrder $record)
     {
-       // dd($record);
+        // dd($record);
 
-       $companyinfo = Companyinfo::first();
-        
+        $companyinfo = Companyinfo::first();
+
         $customer = new Buyer([
             'name'          => $record->client?->name,
             'phone'          => $record->client?->phone,
@@ -330,7 +344,7 @@ class WebController extends Controller
                 'other email' => $companyinfo?->other_email,
             ],
         ]);
-        
+
         $items = [];
 
         foreach ($record->orderitems as $item) {
@@ -338,7 +352,7 @@ class WebController extends Controller
         }
 
         //$note = $record->terms;
-        
+
         $invoice = Invoice::make()
             ->template('order')
             ->series('INV')
@@ -351,43 +365,36 @@ class WebController extends Controller
             ->discountByPercent($record->discount)
             ->taxRate($record->tax)
             ->shipping(0)
-           // ->notes($note)
-            ->filename('saleorder-for-'.Str::slug($customer->name))
+            // ->notes($note)
+            ->filename('saleorder-for-' . Str::slug($customer->name))
             //->logo(Storage::path($companyinfo->logo))
             ->addItems($items);
-                    
+
         return $invoice->stream();
     }
 
 
-    public function pos_invoice($salesid) {
-        
-        $sale = Sales::where('id',$salesid)->first();
+    public function pos_invoice($salesid)
+    {
 
-        $pos = Possettings::where('warehouse_id',$sale->warehouse_id)->first();
+        $sale = Sales::where('id', $salesid)->first();
+
+        $pos = Possettings::where('warehouse_id', $sale->warehouse_id)->first();
 
         $f = new \NumberFormatter(Config::get('app.locale'), \NumberFormatter::SPELLOUT);
         $numberInWords = $f->format($sale->grand_total ?? 0);
 
-        return view('print.pos-invoice',compact('sale','pos','numberInWords'));
+        return view('print.pos-invoice', compact('sale', 'pos', 'numberInWords'));
     }
 
 
-    public function sale_packing_slip($salesid) {
+    public function sale_packing_slip($salesid)
+    {
 
-        $sale = Sales::with(['unit','delivery','saleitem'])->where('id',$salesid)->first();
+        $sale = Sales::with(['unit', 'delivery', 'saleitem'])->where('id', $salesid)->first();
 
-        $pos = Possettings::where('warehouse_id',$sale->warehouse_id)->first();
+        $pos = Possettings::where('warehouse_id', $sale->warehouse_id)->first();
 
-        return view('filament.resources.sales-resource.pages.packing-invoice',compact('sale','pos'));
+        return view('filament.resources.sales-resource.pages.packing-invoice', compact('sale', 'pos'));
     }
-
-
-    
-
-
-
-
-
-
 }
