@@ -50,12 +50,14 @@ class CashierPanelProvider extends PanelProvider
             ->widgets([
                 Widgets\AccountWidget::class,
                // Widgets\FilamentInfoWidget::class,
-               FilamentBackgroundsPlugin::make()
+            ])
+            ->plugins([
+                FilamentBackgroundsPlugin::make()
                     ->imageProvider(
                         MyImages::make()
                             ->directory('images/backgrounds')
                     ),
-            ])
+                ])
             ->middleware([
                 EncryptCookies::class,
                 AddQueuedCookiesToResponse::class,

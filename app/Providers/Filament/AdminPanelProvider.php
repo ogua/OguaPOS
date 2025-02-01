@@ -10,6 +10,8 @@ use Filament\PanelProvider;
 use App\Filament\Pages\Dashboard;
 use App\Filament\Pages\Auth\Login;
 use Filament\Support\Colors\Color;
+use Filament\View\PanelsRenderHook;
+use Illuminate\Support\Facades\Blade;
 use Filament\Navigation\NavigationItem;
 use App\Filament\Pages\Auth\EditProfile;
 use App\Filament\Resources\SalesResource;
@@ -89,6 +91,10 @@ class AdminPanelProvider extends PanelProvider
                                         ->directory('images/backgrounds')
                                 ),
                             ])
+                            ->renderHook(
+                                PanelsRenderHook::CONTENT_START,
+                                fn(): string => Blade::render('@livewire(\App\Livewire\ShoutSubscription::class)'))
+                            ->databaseNotifications()
                             ->middleware([
                                 EncryptCookies::class,
                                 AddQueuedCookiesToResponse::class,

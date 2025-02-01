@@ -1478,6 +1478,7 @@ namespace App\Models {
     /**
      * App\Models\Companyinfo
      *
+     * @property date|null $exp_date
      * @property int|null $warehouse_id
      * @property \Illuminate\Support\Carbon|null $updated_at
      * @property \Illuminate\Support\Carbon|null $created_at
@@ -1506,6 +1507,7 @@ namespace App\Models {
      * @method static \Illuminate\Database\Eloquent\Builder|Companyinfo whereCreatedAt($value)
      * @method static \Illuminate\Database\Eloquent\Builder|Companyinfo whereUpdatedAt($value)
      * @method static \Illuminate\Database\Eloquent\Builder|Companyinfo whereWarehouseId($value)
+     * @method static \Illuminate\Database\Eloquent\Builder|Companyinfo whereExpDate($value)
      * @method static \Illuminate\Database\Eloquent\Builder|Companyinfo newModelQuery()
      * @method static \Illuminate\Database\Eloquent\Builder|Companyinfo newQuery()
      * @method static \Illuminate\Database\Eloquent\Builder|Companyinfo query()

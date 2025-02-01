@@ -239,6 +239,7 @@ class ComposerStaticInit9c491b8531eec05ba41a11d9276a5749
         ),
         'A' => 
         array (
+            'Awcodes\\Shout\\' => 14,
             'App\\' => 4,
             'AnourValar\\EloquentSerialize\\' => 29,
         ),
@@ -773,6 +774,10 @@ class ComposerStaticInit9c491b8531eec05ba41a11d9276a5749
         array (
             0 => __DIR__ . '/..' . '/barryvdh/laravel-debugbar/src',
         ),
+        'Awcodes\\Shout\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/awcodes/shout/src',
+        ),
         'App\\' => 
         array (
             0 => __DIR__ . '/../..' . '/app',
@@ -1154,6 +1159,12 @@ class ComposerStaticInit9c491b8531eec05ba41a11d9276a5749
         'App\\Services\\Saleservice' => __DIR__ . '/../..' . '/app/Services/Saleservice.php',
         'App\\Support\\ProductSearchImage' => __DIR__ . '/../..' . '/app/Support/ProductSearchImage.php',
         'Attribute' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
+        'Awcodes\\Shout\\Components\\Concerns\\HasContent' => __DIR__ . '/..' . '/awcodes/shout/src/Components/Concerns/HasContent.php',
+        'Awcodes\\Shout\\Components\\Concerns\\HasIcon' => __DIR__ . '/..' . '/awcodes/shout/src/Components/Concerns/HasIcon.php',
+        'Awcodes\\Shout\\Components\\Concerns\\HasType' => __DIR__ . '/..' . '/awcodes/shout/src/Components/Concerns/HasType.php',
+        'Awcodes\\Shout\\Components\\Shout' => __DIR__ . '/..' . '/awcodes/shout/src/Components/Shout.php',
+        'Awcodes\\Shout\\Components\\ShoutEntry' => __DIR__ . '/..' . '/awcodes/shout/src/Components/ShoutEntry.php',
+        'Awcodes\\Shout\\ShoutServiceProvider' => __DIR__ . '/..' . '/awcodes/shout/src/ShoutServiceProvider.php',
         'Barryvdh\\Debugbar\\Console\\ClearCommand' => __DIR__ . '/..' . '/barryvdh/laravel-debugbar/src/Console/ClearCommand.php',
         'Barryvdh\\Debugbar\\Controllers\\AssetController' => __DIR__ . '/..' . '/barryvdh/laravel-debugbar/src/Controllers/AssetController.php',
         'Barryvdh\\Debugbar\\Controllers\\BaseController' => __DIR__ . '/..' . '/barryvdh/laravel-debugbar/src/Controllers/BaseController.php',
