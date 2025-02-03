@@ -212,7 +212,8 @@
                 <tr>
                     <td class="centered" colspan="3">
                     <?php echo '<img style="margin-top:10px;" src="data:image/png;base64,' .DNS1D::getBarcodePNG($sale->reference_number, 'C128') . '" width="300" alt="barcode"   />';?>
-                   <!--- //echo //'<img style="margin-top:10px;" src="data:image/png;base64,' .DNS2D::getBarcodePNG($sale->reference_number, 'QRCODE') . '" alt="barcode"   />';--->
+                    <br>
+                    <?php echo '<img style="margin-top:10px;" src="data:image/png;base64,' .DNS2D::getBarcodePNG($sale->reference_number, 'QRCODE') . '" alt="barcode"   />';?>
                     </td>
                 </tr>
             </tbody>
